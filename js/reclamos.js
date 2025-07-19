@@ -1,7 +1,7 @@
 const API_URL = "http://localhost:8081/api";
 const formReclamo = document.getElementById('form-reclamo');
 if (formReclamo) {
-    formReclamo.addEventListener('submit', function(e) {
+    formReclamo.addEventListener('submit', function (e) {
         e.preventDefault();
         const data = {
             tipo: formReclamo.tipo.value,
@@ -12,14 +12,14 @@ if (formReclamo) {
         };
         fetch(API_URL + '/reclamos', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res))
-        .then(() => {
-            localStorage.setItem('mensajeReclamo', 'Su reclamo ha sido procesado');
-            window.location.href = '../index.html';
-        })
-        .catch(() => alert('Error al enviar reclamo'));
+            .then(res => res.ok ? res.json() : Promise.reject(res))
+            .then(() => {
+                localStorage.setItem('mensajeReclamo', 'Su reclamo ha sido procesado');
+                window.location.href = '../index.html';
+            })
+            .catch(() => alert('Error al enviar reclamo'));
     });
 }

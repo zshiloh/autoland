@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,43 +10,47 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
+
 <body>
     <header class="container-fluid bg-white shadow-sm">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white py-2">
-        <a class="navbar-brand" href="../index.html">
-            <img src="../img/logo.png" alt="AUTOLAND" id="logo" class="img-fluid">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNavbar">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-            <li class="nav-item">
-                <a class="nav-link" href="./contacto.html">Contacto</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./locales.html">Locales</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-agendar-btn btn btn-warning text-white px-3 ms-lg-2" href="./agendar-cita.html" id="nav-agendar">Agendar cita</a>
-            </li>
-            <li class="nav-item dropdown" id="usuario-dropdown" style="display:none;">
-            <a class="nav-link dropdown-toggle" href="#" id="usuarioMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span id="usuario-nombre"></span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioMenu">
-                <li><a class="dropdown-item" href="./mis-citas.html">Mis citas</a></li>
-                <li><a class="dropdown-item" href="#" id="logout-link">Cerrar sesión</a></li>
-            </ul>
-            </li>
-            <li class="nav-item" id="login-nav-item">
-            <a class="nav-link" href="./login.html" id="nav-login">Iniciar Sesion</a>
-            </li>
-            </ul>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-2">
+                <a class="navbar-brand" href="../index.html">
+                    <img src="../img/logo.png" alt="AUTOLAND" id="logo" class="img-fluid">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./contacto.html">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./locales.html">Locales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-agendar-btn btn btn-warning text-white px-3 ms-lg-2"
+                                href="./agendar-cita.html" id="nav-agendar">Agendar cita</a>
+                        </li>
+                        <li class="nav-item dropdown" id="usuario-dropdown" style="display:none;">
+                            <a class="nav-link dropdown-toggle" href="#" id="usuarioMenu" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span id="usuario-nombre"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioMenu">
+                                <li><a class="dropdown-item" href="./mis-citas.html">Mis citas</a></li>
+                                <li><a class="dropdown-item" href="#" id="logout-link">Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item" id="login-nav-item">
+                            <a class="nav-link" href="./login.html" id="nav-login">Iniciar Sesion</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-        </nav>
-    </div>
     </header>
 
     <section id="progreso-section" class="container-fluid">
@@ -89,7 +94,9 @@
                 <aside class="col-lg-3 content-info">
                     <h2 class="content-title">Confía tu vehículo a los expertos</h2>
                     <p>
-                        Somos un taller de servicio autorizado con más de 25 años de experiencia. Nos destacamos por ofrecer atención personalizada, procesos eficientes y un servicio de alta calidad, respaldado por un equipo técnico altamente capacitado.
+                        Somos un taller de servicio autorizado con más de 25 años de experiencia. Nos destacamos por
+                        ofrecer atención personalizada, procesos eficientes y un servicio de alta calidad, respaldado
+                        por un equipo técnico altamente capacitado.
                     </p>
                     <img src="../img/sectionImage.png" alt="AUTOLAND" class="car-image">
                 </aside>
@@ -163,7 +170,8 @@
                         </div>
 
                         <label for="calendario-input" class="form-label">Selecciona una fecha</label>
-                        <input type="text" id="calendario-input" class="form-control" placeholder="Selecciona una fecha" readonly>
+                        <input type="text" id="calendario-input" class="form-control" placeholder="Selecciona una fecha"
+                            readonly>
                     </form>
                 </section>
 
@@ -203,15 +211,19 @@
                     <h4 class="mb-3">Autoland</h4>
                     <ul class="list-unstyled">
                         <li><a href="./locales.html" class="text-white text-decoration-none">Locales</a></li>
-                        <li><a href="./terminos.html" class="text-white text-decoration-none">Términos y condiciones</a></li>
+                        <li><a href="./terminos.html" class="text-white text-decoration-none">Términos y condiciones</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-lg-3 mb-3">
                     <h4 class="mb-3">Servicios</h4>
                     <ul class="list-unstyled">
-                        <li><a href="./agendar-cita.html" class="text-white text-decoration-none">Separa tu mantenimiento</a></li>
-                        <li><a href="./agendar-cita.html" class="text-white text-decoration-none">Financiamiento</a></li>
-                        <li><a href="../index.html#autos-section" class="text-white text-decoration-none">Modelos</a></li>
+                        <li><a href="./agendar-cita.html" class="text-white text-decoration-none">Separa tu
+                                mantenimiento</a></li>
+                        <li><a href="./agendar-cita.html" class="text-white text-decoration-none">Financiamiento</a>
+                        </li>
+                        <li><a href="../index.html#autos-section" class="text-white text-decoration-none">Modelos</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-lg-3 mb-3">
@@ -226,7 +238,8 @@
                 <div class="col-lg-3 mb-3 d-flex flex-column align-items-center">
                     <img src="../img/logoBlanco.png" alt="AUTOLAND" id="footer-logo" class="mb-2">
                     <a href="./libro-reclamaciones.html">
-                        <img src="../img/libroReclamaciones.png" alt="Libro de Reclamaciones" id="libro-reclamaciones-img">
+                        <img src="../img/libroReclamaciones.png" alt="Libro de Reclamaciones"
+                            id="libro-reclamaciones-img">
                     </a>
                 </div>
             </div>
@@ -234,12 +247,12 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-    document.querySelectorAll('.time-button').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.time-button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+        document.querySelectorAll('.time-button').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.time-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
         });
-    });
     </script>
     <script>
         flatpickr("#calendario-input", {
@@ -252,4 +265,5 @@
     <script src="../js/navbar.js"></script>
     <script src="../js/citas.js"></script>
 </body>
+
 </html>

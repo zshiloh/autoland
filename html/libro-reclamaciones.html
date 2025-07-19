@@ -1,191 +1,190 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AUTOLAND</title>
-    <link rel="icon" href="../img/favicon.ico">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AUTOLAND</title>
+  <link rel="icon" href="../img/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
-    <header class="container-fluid bg-white shadow-sm">
+  <header class="container-fluid bg-white shadow-sm">
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white py-2">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-2">
         <a class="navbar-brand" href="../index.html">
-            <img src="../img/logo.png" alt="AUTOLAND" id="logo" class="img-fluid">
+          <img src="../img/logo.png" alt="AUTOLAND" id="logo" class="img-fluid">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+          aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mainNavbar">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
             <li class="nav-item">
-                <a class="nav-link" href="../html/contacto.html">Contacto</a>
+              <a class="nav-link" href="../html/contacto.html">Contacto</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../html/locales.html">Locales</a>
+              <a class="nav-link" href="../html/locales.html">Locales</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link nav-agendar-btn btn btn-warning text-white px-3 ms-lg-2" href="../html/agendar-cita.html" id="nav-agendar">Agendar cita</a>
+              <a class="nav-link nav-agendar-btn btn btn-warning text-white px-3 ms-lg-2"
+                href="../html/agendar-cita.html" id="nav-agendar">Agendar cita</a>
             </li>
             <li class="nav-item dropdown" id="usuario-dropdown" style="display:none;">
-            <a class="nav-link dropdown-toggle" href="#" id="usuarioMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="usuarioMenu" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 <span id="usuario-nombre"></span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioMenu">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioMenu">
                 <li><a class="dropdown-item" href="../html/mis-citas.html">Mis citas</a></li>
                 <li><a class="dropdown-item" href="#" id="logout-link">Cerrar sesión</a></li>
-            </ul>
+              </ul>
             </li>
             <li class="nav-item" id="login-nav-item">
-            <a class="nav-link" href="../html/login.html" id="nav-login">Iniciar Sesion</a>
+              <a class="nav-link" href="../html/login.html" id="nav-login">Iniciar Sesion</a>
             </li>
-            </ul>
+          </ul>
         </div>
-        </nav>
+      </nav>
     </div>
-    </header>
+  </header>
 
-    <main id="cuerpo">
-      <section id="libro-reclamaciones" class="container-fluid">
-            <div class="container">
+  <main id="cuerpo">
+    <section id="libro-reclamaciones" class="container-fluid">
+      <div class="container">
 
-      <section id="banner-reclamo">
-        <div class="container banner-content">
-          <div class="banner-img">
-            <img src="../img/libro-reclamo.png" alt="Libro de Reclamaciones">
+        <section id="banner-reclamo">
+          <div class="container banner-content">
+            <div class="banner-img">
+              <img src="../img/libro-reclamo.png" alt="Libro de Reclamaciones">
+            </div>
+            <div class="banner-img">
+              <img src="../img/reclamo-autoland.png" alt="Reclamo Autoland">
+            </div>
           </div>
-          <div class="banner-img">
-            <img src="../img/reclamo-autoland.png" alt="Reclamo Autoland">
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="formulario-contacto-reclamo" class="reclamos-formulario">
-        <div class="container form-pair">
+        <section id="formulario-contacto-reclamo" class="reclamos-formulario">
+          <div class="container form-pair">
 
-          <div id="formulario-datos" class="formulario-col">
-            <h2>Datos Personales</h2>
-            <form>
-              <input type="text" name="nombres" placeholder="Nombres *" required>
-              <input type="text" name="apellidos" placeholder="Apellidos *" required>
-              <input type="text" name="dni" placeholder="DNI *" required>
-              <input type="tel" name="telefono" placeholder="Teléfono *" required>
-              <input type="email" name="email" placeholder="Correo electrónico *" required>
-              <input type="text" name="ciudad" placeholder="Ciudad *" required>
-              <input type="text" name="placa" placeholder="Placa">
-              <textarea name="detalle" placeholder="Detalle del reclamo o queja *" rows="4" required></textarea>
-            </form>
-          </div>
+            <div id="formulario-datos" class="formulario-col">
+              <h2>Datos Personales</h2>
+              <form>
+                <input type="text" name="nombres" placeholder="Nombres *" required>
+                <input type="text" name="apellidos" placeholder="Apellidos *" required>
+                <input type="text" name="dni" placeholder="DNI *" required>
+                <input type="tel" name="telefono" placeholder="Teléfono *" required>
+                <input type="email" name="email" placeholder="Correo electrónico *" required>
+                <input type="text" name="ciudad" placeholder="Ciudad *" required>
+                <input type="text" name="placa" placeholder="Placa">
+                <textarea name="detalle" placeholder="Detalle del reclamo o queja *" rows="4" required></textarea>
+              </form>
+            </div>
 
-          <div class="formulario-col">
-            <h2>Enviar una solicitud</h2>
-            <form id="form-reclamo">
-              <select name="tipo" required>
-                <option value="" disabled selected>Tipo de solicitud</option>
-                <option value="reclamo">Reclamo</option>
-                <option value="queja">Queja</option>
-              </select>
+            <div class="formulario-col">
+              <h2>Enviar una solicitud</h2>
+              <form id="form-reclamo">
+                <select name="tipo" required>
+                  <option value="" disabled selected>Tipo de solicitud</option>
+                  <option value="reclamo">Reclamo</option>
+                  <option value="queja">Queja</option>
+                </select>
 
-              <select name="servicio" required>
-                <option value="" disabled selected>Tipo de servicio</option>
-                <option value="venta_nuevos">Venta nuevos</option>
-                <option value="venta_usados">Venta usados</option>
-                <option value="servicio_tecnico">Servicio técnico</option>
-                <option value="repuestos">Repuestos</option>
-              </select>
+                <select name="servicio" required>
+                  <option value="" disabled selected>Tipo de servicio</option>
+                  <option value="venta_nuevos">Venta nuevos</option>
+                  <option value="venta_usados">Venta usados</option>
+                  <option value="servicio_tecnico">Servicio técnico</option>
+                  <option value="repuestos">Repuestos</option>
+                </select>
 
-              <select name="motivo" required>
-                <option value="" disabled selected>Motivo de contacto</option>
-                <option value="entrega">Fecha de entrega de vehículo</option>
-                <option value="devolicion">Devolición de dinero pendiente</option>
-                <option value="boleta">Solicitud de factura o boleta</option>
-                <option value="documentacion">Documentación pendiente</option>
-                <option value="accesorio">Accesorio o repuesto pendiente</option>
-                <option value="mecanica">Falla mecánica</option>
-                <option value="atencion">Atención asesor de ventas o servicio</option>
-                <option value="perdida">Perdida de objetos personales</option>
-                <option value="papeles">Papeletas</option>
-                <option value="otros">Otros</option>
-              </select>
+                <select name="motivo" required>
+                  <option value="" disabled selected>Motivo de contacto</option>
+                  <option value="entrega">Fecha de entrega de vehículo</option>
+                  <option value="devolicion">Devolición de dinero pendiente</option>
+                  <option value="boleta">Solicitud de factura o boleta</option>
+                  <option value="documentacion">Documentación pendiente</option>
+                  <option value="accesorio">Accesorio o repuesto pendiente</option>
+                  <option value="mecanica">Falla mecánica</option>
+                  <option value="atencion">Atención asesor de ventas o servicio</option>
+                  <option value="perdida">Perdida de objetos personales</option>
+                  <option value="papeles">Papeletas</option>
+                  <option value="otros">Otros</option>
+                </select>
 
+                <select name="local" required>
+                  <option value="" disabled selected>Local</option>
+                  <option value="miraflores">Surco</option>
+                  <option value="la victoria">La Marina</option>
+                  <option value="los olivos">Naranjal</option>
+                  <option value="ate">Surquillo</option>
+                </select>
 
-              <select name="local" required>
-                <option value="" disabled selected>Local</option>
-                <option value="miraflores">Surco</option>
-                <option value="la victoria">La Marina</option>
-                <option value="los olivos">Naranjal</option>
-                <option value="ate">Surquillo</option>
-              </select>
-
-              <div class="checkbox-group">
-                <div class="checkbox-item">
-                  <label>
-                    <input type="checkbox" name="tc" required>
-                    Declaro que soy el titular o autorizado.
-                  </label>
-                  <div class="info-extra">
-                  <span>He leído y acepto los <a href="../html/terminos.html" id="link-terminos" target="_blank">(Términos y condiciones)</a></span>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <label>
+                      <input type="checkbox" name="tc" required>
+                      Declaro que soy el titular o autorizado.
+                    </label>
+                    <div class="info-extra">
+                      <span>He leído y acepto los <a href="../html/terminos.html" id="link-terminos"
+                          target="_blank">(Términos y condiciones)</a></span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <button id="boton-de-enviar" type="submit">Enviar</button>
-            </form>
+                <button id="boton-de-enviar" type="submit">Enviar</button>
+              </form>
+            </div>
+
           </div>
+        </section>
+      </div>
+    </section>
+  </main>
 
+  <footer class="container-fluid bg-dark text-white py-4">
+    <div class="container">
+      <div class="row text-center text-lg-start">
+        <div class="col-lg-3 mb-3">
+          <h4 class="mb-3">Autoland</h4>
+          <ul class="list-unstyled">
+            <li><a href="../html/locales.html" class="text-white text-decoration-none">Locales</a></li>
+            <li><a href="../html/terminos.html" class="text-white text-decoration-none">Términos y condiciones</a></li>
+          </ul>
         </div>
-      </section>
-            </div>
-          </section>
-    </main>
-
-    <footer class="container-fluid bg-dark text-white py-4">
-        <div class="container">
-            <div class="row text-center text-lg-start">
-                <div class="col-lg-3 mb-3">
-                    <h4 class="mb-3">Autoland</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="../html/locales.html" class="text-white text-decoration-none">Locales</a></li>
-                        <li><a href="../html/terminos.html" class="text-white text-decoration-none">Términos y condiciones</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <h4 class="mb-3">Servicios</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="../html/agendar-cita.html" class="text-white text-decoration-none">Separa tu mantenimiento</a></li>
-                        <li><a href="../html/agendar-cita.html" class="text-white text-decoration-none">Financiamiento</a></li>
-                        <li><a href="../index.html#autos-section" class="text-white text-decoration-none">Modelos</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <h4 class="mb-3">Contacto</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="../html/contacto.html" class="text-white text-decoration-none">Contacto</a></li>
-                        <li><a href="../html/contacto.html" class="text-white text-decoration-none">Enviar solicitud</a></li>
-                        <li>982 578 096</li>
-                        <li>(01)500-5444</li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 mb-3 d-flex flex-column align-items-center">
-                    <img src="../img/logoBlanco.png" alt="AUTOLAND" id="footer-logo" class="mb-2">
-                    <a href="../html/libro-reclamaciones.html">
-                        <img src="../img/libroReclamaciones.png" alt="Libro de Reclamaciones" id="libro-reclamaciones-img">
-                    </a>
-                </div>
-            </div>
+        <div class="col-lg-3 mb-3">
+          <h4 class="mb-3">Servicios</h4>
+          <ul class="list-unstyled">
+            <li><a href="../html/agendar-cita.html" class="text-white text-decoration-none">Separa tu mantenimiento</a>
+            </li>
+            <li><a href="../html/agendar-cita.html" class="text-white text-decoration-none">Financiamiento</a></li>
+            <li><a href="../index.html#autos-section" class="text-white text-decoration-none">Modelos</a></li>
+          </ul>
         </div>
-    </footer>
-    <script>
-    document.getElementById('form-reclamo').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Guarda el mensaje en localStorage
-        localStorage.setItem('mensajeReclamo', 'Su reclamo ha sido procesado');
-        // Redirige al inicio
-        window.location.href = "../index.html"; // Ruta corregida
-    });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/navbar.js"></script>
+        <div class="col-lg-3 mb-3">
+          <h4 class="mb-3">Contacto</h4>
+          <ul class="list-unstyled">
+            <li><a href="../html/contacto.html" class="text-white text-decoration-none">Contacto</a></li>
+            <li><a href="../html/contacto.html" class="text-white text-decoration-none">Enviar solicitud</a></li>
+            <li>982 578 096</li>
+            <li>(01)500-5444</li>
+          </ul>
+        </div>
+        <div class="col-lg-3 mb-3 d-flex flex-column align-items-center">
+          <img src="../img/logoBlanco.png" alt="AUTOLAND" id="footer-logo" class="mb-2">
+          <a href="../html/libro-reclamaciones.html">
+            <img src="../img/libroReclamaciones.png" alt="Libro de Reclamaciones" id="libro-reclamaciones-img">
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/reclamos.js"></script>
 </body>
+
 </html>

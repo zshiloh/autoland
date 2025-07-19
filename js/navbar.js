@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
     const usuarioDropdown = document.getElementById('usuario-dropdown');
     const usuarioNombre = document.getElementById('usuario-nombre');
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Logout
     const logout = document.getElementById('logout-link');
     if (logout) {
-        logout.addEventListener('click', function(e) {
+        logout.addEventListener('click', function (e) {
             e.preventDefault();
             localStorage.removeItem('usuario');
             localStorage.removeItem('token');
