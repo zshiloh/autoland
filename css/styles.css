@@ -1,0 +1,1238 @@
+/* locales.html */
+
+#locales-header {
+  background-color: #f2f2f2;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#locales-header .logo {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+#locales-header .nav-links a,
+#locales-header .nav-link {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #000;
+}
+
+#locales-header .nav-agendar-btn,
+#locales-header .btn-cita {
+  background-color: orange;
+  padding: 8px 16px;
+  color: white;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#locales-section-title {
+  background-color: #e0e0e0;
+  padding: 20px;
+  font-weight: bold;
+}
+
+#locales-container {
+  padding: 20px;
+}
+
+#locales-container .locales-title {
+  margin-bottom: 10px;
+}
+
+.locales-acordeon-item .locales-local {
+  background-color: #d9d9d9;
+  padding: 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.locales-acordeon-item .locales-icono {
+  font-size: 18px;
+}
+
+.locales-acordeon-item .locales-contenido {
+  display: none;
+  padding: 10px 15px;
+  background-color: #efefef;
+  font-size: 14px;
+  border-left: 4px solid orange;
+  margin-bottom: 10px;
+}
+
+#locales-footer {
+  background-color: #000;
+  color: white;
+  padding: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#locales-footer div {
+  margin-bottom: 20px;
+}
+
+#locales-footer h4 {
+  margin-bottom: 10px;
+}
+
+#locales-footer a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.locales-reclamos {
+  text-align: center;
+}
+
+.locales-reclamos img {
+  width: 50px;
+  margin-top: 10px;
+}
+
+/* terminos.html */
+
+.terms-container {
+    background-color: white;
+    padding: 60px;
+    border-radius: 8px;
+}
+
+.terms-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #ff8c00;
+    padding-bottom: 20px;
+}
+
+.terms-subtitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-left: 4px solid #ff8c00;
+    padding-left: 15px;
+}
+
+.terms-content {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+.terms-list {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    padding-left: 20px;
+}
+
+.terms-list li {
+    margin-bottom: 10px;
+}
+
+/* agendar-cita.html, confirmar-cita.html ingresar-datos.html */
+/* ===== SECCIÓN DE PROGRESO ===== */
+#progreso-section {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 30px 0;
+}
+
+#progreso-section .progress-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+}
+
+#progreso-section .progress-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+#progreso-section .progress-steps {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (min-width: 992px) {
+    #progreso-section .progress-container {
+        flex-direction: row;
+        gap: 100px;
+        text-align: left;
+    }
+    
+    #progreso-section .progress-steps {
+        gap: 100px;
+        flex-wrap: nowrap;
+    }
+}
+
+#progreso-section .step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #666;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 auto 10px;
+}
+
+#progreso-section .step-circle.active {
+    background-color: #ff8c00;
+}
+
+#progreso-section .step-text {
+    font-size: 13px;
+    text-align: center;
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+#main-contenido {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+}
+
+#main-contenido .content-section {
+    background-color: white;
+}
+
+#main-contenido .content-info {
+    padding: 40px;
+}
+
+#main-contenido .content-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#main-contenido .car-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ===== SECCIÓN DE FORMULARIO ===== */
+#main-contenido .form-section {
+    padding: 40px;
+}
+
+#main-contenido .form-label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+#main-contenido .form-control,
+#main-contenido .form-select {
+    height: 45px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+#main-contenido .form-control:focus,
+#main-contenido .form-select:focus {
+    border-color: #ff8c00;
+    box-shadow: 0 0 0 0.2rem rgba(255, 140, 0, 0.25);
+}
+
+/* ===== CALENDARIO ===== */
+#calendario-section {
+    margin-top: 30px;
+}
+
+#calendario-section .calendar-header {
+    background-color: #ff8c00;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+}
+
+#calendario-section .calendar-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#calendario-section .calendar-nav.prev {
+    left: 10px;
+}
+
+#calendario-section .calendar-nav.next {
+    right: 10px;
+}
+
+#calendario-section .calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+#calendario-section .calendar-table th {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#calendario-section .calendar-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #eee;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#calendario-section .calendar-table td:hover {
+    background-color: #f5f5f5;
+}
+
+#calendario-section .calendar-table td.selected {
+    background-color: #ff8c00;
+    color: white;
+    font-weight: bold;
+}
+
+/* ===== SECCIÓN DE HORARIOS ===== */
+#main-contenido .time-section {
+    padding: 40px;
+}
+
+#main-contenido .time-button {
+    background-color: #e9ecef;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+#main-contenido .time-button:hover {
+    background-color: #9e9e9e;
+}
+
+#main-contenido .link-rectificar {
+    color: #6c757d;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* ===== SECCIÓN DE INFORMACIÓN ===== */
+#main-contenido .info-section {
+    padding: 40px;
+}
+
+#vehiculo-info-card,
+#cita-info-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#vehiculo-info-card .info-card-header,
+#cita-info-card .info-card-header {
+    background-color: #495057;
+    color: white;
+    padding: 10px 15px;
+    margin: -20px -20px 15px -20px;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+#vehiculo-info-card .info-grid,
+#cita-info-card .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    font-size: 14px;
+}
+
+#vehiculo-info-card .info-item,
+#cita-info-card .info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+#vehiculo-info-card .info-label,
+#cita-info-card .info-label {
+    font-weight: bold;
+    color: #666;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+#vehiculo-info-card .info-value,
+#cita-info-card .info-value {
+    color: #333;
+    font-weight: 500;
+}
+
+/* ===== CHECKBOXES ===== */
+#terminos-section {
+    margin: 30px 0;
+}
+
+#terminos-section .custom-checkbox {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+#terminos-section input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+#link-terminos {
+    color: #ff8c00;
+    text-decoration: none;
+}
+
+#link-terminos:hover {
+    text-decoration: underline;
+}
+
+/* ===== BOTONES ===== */
+#btn-siguiente {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+#btn-siguiente-a {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+#btn-siguiente:hover {
+    background-color: #e67c00;
+    color: white;
+}
+
+#btn-volver {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+#btn-volver:hover {
+    background-color: #5a6268;
+    color: white;
+}
+
+#btn-confirmar {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+#btn-confirmar:hover {
+    background-color: #e67c00;
+    color: white;
+}
+
+.horas-scroll {
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  padding: 8px 0;
+  background: #fafafa;
+}
+.time-button {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  background: #fff;
+  border: 1px solid #ff8c00;
+  color: #000000;
+  border-radius: 4px;
+  padding: 8px 0;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+}
+.time-button:hover, .time-button.active {
+  background: #ff8c00;
+  color: #fff;
+}
+@media (max-width: 991px) {
+  .horas-scroll {
+    max-height: 160px;
+  }
+}
+
+@media (min-width: 992px) {
+    #btn-volver {
+        width: 25%; 
+        margin-bottom: 0;
+        margin-right: 5%;
+    }
+    
+    #btn-siguiente {
+        width: 25%;
+        margin-left: 0;
+        margin-right: 5%;
+    }
+}
+
+#btn-volver-terminos {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+#btn-volver-terminos:hover {
+    background-color: #5a6268;
+    color: white;
+}
+
+#btn-confirmar {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    #btn-confirmar {
+        width: 25%; 
+        margin-bottom: 0;
+        margin-right: 5%;
+    }
+}
+
+#btn-confirmar:hover {
+    background-color: #e67c00;
+    color: white;
+}
+
+#form-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#boton-volver-container {
+    margin-top: 30px;
+}
+
+/* ===== TERMINOS Y CONDICIONES ==== */
+#terminos-content {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+}
+
+#terminos-content .terms-container {
+    background-color: white;
+    padding: 60px;
+    border-radius: 8px;
+}
+
+#main-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #ff8c00;
+    padding-bottom: 20px;
+}
+
+#termino-1,
+#termino-2,
+#termino-3,
+#termino-4,
+#termino-5,
+#termino-6,
+#termino-7,
+#termino-8,
+#termino-9 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-left: 4px solid #ff8c00;
+    padding-left: 15px;
+}
+
+#terminos-content .terms-content {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+#servicios-list,
+#cancelaciones-list {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    padding-left: 20px;
+}
+
+#servicios-list li,
+#cancelaciones-list li {
+    margin-bottom: 10px;
+}
+
+#fecha-actualizacion {
+    margin-top: 40px;
+    font-weight: bold;
+}
+/* Estilo para el botón "Volver" en términos y condiciones */
+.btn-volver {
+  background-color: #ff8c00;
+  color: #fff !important;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 36px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.btn-volver:hover,
+.btn-volver:focus {
+  background-color: #e67c00;
+  color: #fff !important;
+  text-decoration: none;
+}
+
+/* = contacto.html= */
+#contacto {
+  padding: 60px 0;
+}
+
+/* Formulario */
+#formulario-contactanos h2 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #151515;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .formulario h2 {
+    font-size: 1.5em;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+#cuerpo {
+  font-family: 'Open Sans', sans-serif;
+  background: #fff;
+  color: #151515;
+}
+
+#banner-reclamo {
+  background: #f5f5f5;
+}
+
+#banner-reclamo .banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#banner-reclamo .banner-img {
+  flex: 1;
+  max-width: 48%;
+}
+
+#banner-reclamo .banner-img img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Formularios */
+#formulario-contacto-reclamo .reclamos-formulario {
+  padding: 60px 0;
+}
+
+#formulario-contacto-reclamo .form-pair {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#formulario-contacto-reclamo .formulario-col {
+  flex: 1;
+  min-width: 300px;
+}
+
+#formulario-contacto-reclamo .formulario-col h2 {
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  color: #151515;
+}
+
+#formulario-datos input, textarea, select {
+  width: 100%;
+  background: #f0f0f0;
+  border: none;
+  padding: 15px;
+  margin-bottom: 15px;
+  font-size: 1em;
+  border-radius: 4px;
+}
+
+#formulario-datos input:focus, textarea:focus, select:focus {
+  outline: none;
+  border: 2px solid #960101;
+  background-color: #fff;
+}
+
+#formulario-datos .checkbox-group {
+  margin-bottom: 20px;
+}
+
+#formulario-datos .checkbox-item {
+  margin-bottom: 16px;
+}
+
+#formulario-datos .checkbox-item label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.9em;
+  color: #333;
+  line-height: 1.4;
+}
+
+#formulario-datos .checkbox-item input[type="checkbox"] {
+  width: 19px;
+  height: 18px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+#formulario-datos .checkbox-item .info-extra {
+  font-size: 0.85em;
+  color: #555;
+  margin-left: 28px; /* para alinear con el texto */
+  margin-top: 4px;
+}
+
+#formulario-datos .checkbox-item .info-extra a {
+  color: #960101;
+  text-decoration: underline;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+
+/* Botón */
+#boton-de-enviar {
+  background: #ff9900;
+  color: #000;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+  font-weight: bold;
+}
+
+#boton-de-enviar:hover {
+  background: #e68a00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .banner-content {
+    flex-direction: column;
+  }
+
+  .banner-img {
+    max-width: 100%;
+  }
+
+  .form-pair {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+/* Header y menú */
+header {
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.navbar-brand img {
+  max-height: 48px;
+}
+
+.navbar-nav .nav-link {
+  color: #222;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #ff8c00;
+}
+
+.nav-agendar-btn {
+  background-color: #ff8c00 !important;
+  color: #fff !important;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.nav-agendar-btn:hover {
+  background-color: #e67c00 !important;
+  color: #fff !important;
+}
+
+/* Responsive: mejora el espaciado en móvil */
+@media (max-width: 740px) {
+  .navbar-nav .nav-link {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+  }
+  .nav-agendar-btn {
+    margin: 0.5rem 0;
+    width: 100%;
+  }
+  .navbar-brand {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.auto-cita-link {
+  display: block;
+  text-align: center;
+  font-size: 1.05rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.auto-cita-link:hover {
+  background: #e67c00 !important;
+  color: #fff !important;
+  text-decoration: none;
+}
+
+/* registrarse.html */
+
+#body-login {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#formulario-login {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#titulo-iniciar-sesion {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+#grupo-email {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+#grupo-email label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+#grupo-email input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eee;
+  font-size: 14px;
+}
+
+#grupo-password {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+#grupo-password label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+#grupo-password input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eee;
+  font-size: 14px;
+}
+
+#boton-login {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#btn-iniciar {
+  background-color: orange;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+#btn-iniciar:hover {
+  background-color: #e69500;
+}
+
+#registro-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+#btn-registrarse {
+  background-color: transparent;
+  border: none;
+  color: orange;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+#btn-registrarse:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  #formulario {
+    padding: 20px;
+  }
+
+  #registro-imagen {
+    width: 120%;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  #titulo-iniciar-sesion {
+    font-size: 20px;
+  }
+
+  #formulario input,
+  #formulario button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* registrarse.html */
+
+#body-registro {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#registro-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#registro-box {
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  max-width: 900px;
+  width: 100%;
+}
+
+#registro-imagen {
+  width: 190%;
+  background-color: rgb(179, 42, 42);
+}
+
+#registro-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#registro-form {
+  width: 120%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#registro-form h2 {
+  margin-bottom: 35px;
+  font-size: 50px;
+  color: #333;
+  text-align: center;
+}
+
+#registro-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+#registro-form label {
+  margin-bottom: 3px;
+  font-size: 15px;
+  color: #555;
+}
+
+#registro-form input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #eb6213;
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+#registro-form button {
+  margin-top: 10px;
+  background-color: orange;
+  color: rgb(241, 241, 241);
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#registro-form button:hover {
+  background-color: #cc7a00;
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+  #registro-wrapper {
+    min-height: unset;
+    padding: 30px 0;
+  }
+  #registro-box {
+    margin-left: 8px;
+    margin-right: 8px;
+    max-width: 98vw;
+  }
+  #registro-form,
+  #registro-imagen {
+    width: 100%;
+    min-width: 0;
+  }
+  #registro-form {
+    padding: 24px 18px;
+    box-sizing: border-box;
+  }
+}
+
+/* Móvil: stack columnas, oculta imagen, ajusta paddings y fuentes */
+@media (max-width: 780px) {
+  #registro-box {
+    flex-direction: column;
+    flex-wrap: wrap;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  }
+  #registro-imagen {
+    display: none;
+  }
+  #registro-form {
+    width: 100%;
+    padding: 20px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  #registro-form h2 {
+    font-size: 1.3rem;
+  }
+  #registro-form input,
+  #registro-form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+.time-button.active {
+    background: #000000;
+    color: #b54848;
+}

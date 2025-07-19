@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTOLAND</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header class="container-fluid bg-white shadow-sm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-2">
+        <a class="navbar-brand" href="../index.html">
+            <img src="../img/logo.png" alt="AUTOLAND" id="logo" class="img-fluid">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item">
+                <a class="nav-link" href="../html/contacto.html">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../html/locales.html">Locales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-agendar-btn btn btn-warning text-white px-3 ms-lg-2" href="../html/agendar-cita.html" id="nav-agendar">Agendar cita</a>
+            </li>
+            <li class="nav-item dropdown" id="usuario-dropdown" style="display:none;">
+            <a class="nav-link dropdown-toggle" href="#" id="usuarioMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span id="usuario-nombre"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioMenu">
+                <li><a class="dropdown-item" href="../html/mis-citas.html">Mis citas</a></li>
+                <li><a class="dropdown-item" href="#" id="logout-link">Cerrar sesión</a></li>
+            </ul>
+            </li>
+            <li class="nav-item" id="login-nav-item">
+            <a class="nav-link" href="../html/login.html" id="nav-login">Iniciar Sesion</a>
+            </li>
+            </ul>
+        </div>
+        </nav>
+    </div>
+    </header>
+
+    <div id="body-registro">
+        <div id="registro-wrapper">
+            <div id="registro-box">
+                <div id="registro-imagen">
+                    <img src="../img/img-registro.jpg" alt="Registro" />
+                </div>
+                <div id="registro-form">
+                    <h2>Crear cuenta</h2>
+                    <form id="form-registro">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required />
+
+                        <label for="apellidos">Apellidos:</label>
+                        <input type="text" id="apellidos" name="apellidos" required />
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required />
+
+                        <label for="telefono">Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" required />
+
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" id="contrasena" name="contrasena" required />
+
+                        <label for="dni">DNI:</label>
+                        <input type="text" id="dni" name="dni" required />
+
+                        <button type="submit">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container-fluid bg-dark text-white py-4">
+        <div class="container">
+            <div class="row text-center text-lg-start">
+                <div class="col-lg-3 mb-3">
+                    <h4 class="mb-3">Autoland</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="../html/locales.html" class="text-white text-decoration-none">Locales</a></li>
+                        <li><a href="../html/terminos.html" class="text-white text-decoration-none">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <h4 class="mb-3">Servicios</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="../html/agendar-cita.html" class="text-white text-decoration-none">Separa tu mantenimiento</a></li>
+                        <li><a href="../html/agendar-cita.html" class="text-white text-decoration-none">Financiamiento</a></li>
+                        <li><a href="../index.html#autos-section" class="text-white text-decoration-none">Modelos</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <h4 class="mb-3">Contacto</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="../html/contacto.html" class="text-white text-decoration-none">Contacto</a></li>
+                        <li><a href="../html/contacto.html" class="text-white text-decoration-none">Enviar solicitud</a></li>
+                        <li>982 578 096</li>
+                        <li>(01)500-5444</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-3 d-flex flex-column align-items-center">
+                    <img src="../img/logoBlanco.png" alt="AUTOLAND" id="footer-logo" class="mb-2">
+                    <a href="../html/libro-reclamaciones.html">
+                        <img src="../img/libroReclamaciones.png" alt="Libro de Reclamaciones" id="libro-reclamaciones-img">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

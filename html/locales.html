@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTOLAND</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header class="container-fluid bg-white shadow-sm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-2">
+        <a class="navbar-brand" href="../index.html">
+            <img src="../img/logo.png" alt="AUTOLAND" id="logo" class="img-fluid">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item">
+                <a class="nav-link" href="../html/contacto.html">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../html/locales.html">Locales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-agendar-btn btn btn-warning text-white px-3 ms-lg-2" href="../html/agendar-cita.html" id="nav-agendar">Agendar cita</a>
+            </li>
+            <li class="nav-item dropdown" id="usuario-dropdown" style="display:none;">
+            <a class="nav-link dropdown-toggle" href="#" id="usuarioMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span id="usuario-nombre"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioMenu">
+                <li><a class="dropdown-item" href="../html/mis-citas.html">Mis citas</a></li>
+                <li><a class="dropdown-item" href="#" id="logout-link">Cerrar sesión</a></li>
+            </ul>
+            </li>
+            <li class="nav-item" id="login-nav-item">
+            <a class="nav-link" href="../html/login.html" id="nav-login">Iniciar Sesion</a>
+            </li>
+            </ul>
+        </div>
+        </nav>
+    </div>
+    </header>
+    <div id="locales-section-title" class="locales-section-title">Nuestros locales</div>
+
+    <div id="locales-container" class="locales-container">
+        <h3 class="locales-title">Locales de venta</h3>
+
+        <div class="locales-acordeon-item" id="locales-surco">
+            <div class="locales-local">AUTOLAND - SURCO <span class="locales-icono">▾</span></div>
+            <div class="locales-contenido">
+                <p>Dirección: Av. Caminos del Inca 1234, Surco</p>
+                <p>Horario: Lun - Sáb, 9am - 6pm</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.5925000000003!2d-77.00000000000001!3d-12.00000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ5JzUyLjkiUyA3N8KwMDEnMDMuNyJX!5e0!3m2!1sen!2spe!4v1678888888888!5m2!1sen!2spe" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <div class="locales-acordeon-item" id="locales-la-marina">
+            <div class="locales-local">AUTOLAND - LA MARINA <span class="locales-icono">▾</span></div>
+            <div class="locales-contenido">
+                <p>Dirección: Av. La Marina 2345, San Miguel</p>
+                <p>Horario: Lun - Sáb, 9am - 6pm</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.123456789!2d-77.070707!3d-12.070707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA0JzU5LjAiUyA3N8KwMDQnMzQuMCJX!5e0!3m2!1sen!2spe!4v1678888888888!5m2!1sen!2spe" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <div class="locales-acordeon-item" id="locales-naranjal">
+            <div class="locales-local">AUTOLAND - NARANJAL <span class="locales-icono">▾</span></div>
+            <div class="locales-contenido">
+                <p>Dirección: Av. Naranjal 456, Los Olivos</p>
+                <p>Horario: Lun - Sáb, 9am - 6pm</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.87654321!2d-77.060606!3d-11.980808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA0JzU5LjAiUyA3N8KwMDQnMzQuMCJX!5e0!3m2!1sen!2spe!4v1678888888888!5m2!1sen!2spe" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <div class="locales-acordeon-item" id="locales-surquillo">
+            <div class="locales-local">AUTOLAND - SURQUILLO <span class="locales-icono">▾</span></div>
+            <div class="locales-contenido">
+                <p>Dirección: Av. Angamos 789, Surquillo</p>
+                <p>Horario: Lun - Sáb, 9am - 6pm</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.54321098!2d-77.030303!3d-12.110111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA4JzU5LjAiUyA3N8KwMDEnMzQuMCJX!5e0!3m2!1sen!2spe!4v1678888888888!5m2!1sen!2spe" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container-fluid bg-dark text-white py-4">
+        <div class="container">
+            <div class="row text-center text-lg-start">
+                <div class="col-lg-3 mb-3">
+                    <h4 class="mb-3">Autoland</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="../html/locales.html" class="text-white text-decoration-none">Locales</a></li>
+                        <li><a href="../html/terminos.html" class="text-white text-decoration-none">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <h4 class="mb-3">Servicios</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="../html/agendar-cita.html" class="text-white text-decoration-none">Separa tu mantenimiento</a></li>
+                        <li><a href="../html/agendar-cita.html" class="text-white text-decoration-none">Financiamiento</a></li>
+                        <li><a href="../index.html#autos-section" class="text-white text-decoration-none">Modelos</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <h4 class="mb-3">Contacto</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="../html/contacto.html" class="text-white text-decoration-none">Contacto</a></li>
+                        <li><a href="../html/contacto.html" class="text-white text-decoration-none">Enviar solicitud</a></li>
+                        <li>982 578 096</li>
+                        <li>(01)500-5444</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-3 d-flex flex-column align-items-center">
+                    <img src="../img/logoBlanco.png" alt="AUTOLAND" id="footer-logo" class="mb-2">
+                    <a href="../html/libro-reclamaciones.html">
+                        <img src="../img/libroReclamaciones.png" alt="Libro de Reclamaciones" id="libro-reclamaciones-img">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/navbar.js"></script>
+</body>
+</html>
