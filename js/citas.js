@@ -16,7 +16,7 @@ if (btnSiguienteA) {
         e.preventDefault();
 
         // Validar que todos los campos estén llenos
-        const placa = document.getElementById('placa').value;
+        const placa = document.getElementById('placa').value.trim();
         const marca = document.getElementById('marca').value;
         const modelo = document.getElementById('modelo').value;
         const año = document.getElementById('año').value;
@@ -25,8 +25,37 @@ if (btnSiguienteA) {
         const fecha = document.getElementById('calendario-input').value;
         const horaSeleccionada = document.querySelector('.time-button.active');
 
-        if (!placa || !marca || !modelo || !año || !servicio || !sucursal || !fecha || !horaSeleccionada) {
-            alert('Por favor, completa todos los campos y selecciona una hora');
+        // Validaciones
+        if (!placa) {
+            alert('Por favor, ingresa la placa del vehículo');
+            return;
+        }
+        if (marca === 'Seleccione marca') {
+            alert('Por favor, selecciona una marca');
+            return;
+        }
+        if (modelo === 'Seleccione modelo') {
+            alert('Por favor, selecciona un modelo');
+            return;
+        }
+        if (año === 'Seleccione año del modelo') {
+            alert('Por favor, selecciona el año');
+            return;
+        }
+        if (servicio === 'Seleccione servicio') {
+            alert('Por favor, selecciona un servicio');
+            return;
+        }
+        if (sucursal === 'Seleccione local') {
+            alert('Por favor, selecciona una sucursal');
+            return;
+        }
+        if (!fecha) {
+            alert('Por favor, selecciona una fecha');
+            return;
+        }
+        if (!horaSeleccionada) {
+            alert('Por favor, selecciona una hora');
             return;
         }
 
@@ -54,14 +83,38 @@ if (btnSiguiente) {
 
         // Validar campos
         const tipoDocumento = document.getElementById('tipo-documento').value;
-        const numeroDocumento = document.getElementById('numero-documento').value;
-        const nombre = document.getElementById('nombre').value;
-        const apellidos = document.getElementById('apellidos').value;
-        const email = document.getElementById('email').value;
-        const telefono = document.getElementById('telefono').value;
+        const numeroDocumento = document.getElementById('numero-documento').value.trim();
+        const nombre = document.getElementById('nombre').value.trim();
+        const apellidos = document.getElementById('apellidos').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
 
-        if (!tipoDocumento || !numeroDocumento || !nombre || !apellidos || !email || !telefono) {
-            alert('Por favor, completa todos los campos');
+        // Validaciones
+        if (!numeroDocumento) {
+            alert('Por favor, ingresa el número de documento');
+            return;
+        }
+        if (!nombre) {
+            alert('Por favor, ingresa tu nombre');
+            return;
+        }
+        if (!apellidos) {
+            alert('Por favor, ingresa tus apellidos');
+            return;
+        }
+        if (!email) {
+            alert('Por favor, ingresa tu email');
+            return;
+        }
+        if (!telefono) {
+            alert('Por favor, ingresa tu teléfono');
+            return;
+        }
+
+        // Validación de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Por favor, ingresa un email válido');
             return;
         }
 
@@ -85,15 +138,22 @@ if (btnConfirmar) {
     btnConfirmar.addEventListener('click', function (e) {
         e.preventDefault();
 
-        // Verificar que se aceptaron los términos
+        // VALIDACIÓN DEL CHECKBOX - CORREGIDO
         const terminosCheckbox = document.getElementById('terminos-checkbox');
-        if (terminosCheckbox && !terminosCheckbox.checked) {
-            alert('Debes aceptar los términos y condiciones');
-            return;
+        if (!terminosCheckbox || !terminosCheckbox.checked) {
+            alert('Debes aceptar los términos y condiciones para continuar');
+            return; // Detiene la ejecución si no está marcado
         }
 
         const datosAgendar = JSON.parse(localStorage.getItem('datosAgendar') || '{}');
         const datosPersonales = JSON.parse(localStorage.getItem('datosPersonales') || '{}');
+
+        // Verificar que existen los datos
+        if (!datosAgendar.fecha || !datosPersonales.nombre) {
+            alert('Error: Faltan datos de la cita. Por favor, vuelve a llenar el formulario.');
+            window.location.href = './agendar-cita.html';
+            return;
+        }
 
         // Estructurar los datos según tu documentación API
         const cita = {
@@ -105,6 +165,7 @@ if (btnConfirmar) {
         };
 
         // Mostrar loading
+        const originalText = btnConfirmar.textContent;
         btnConfirmar.disabled = true;
         btnConfirmar.textContent = 'Enviando...';
 
@@ -132,11 +193,22 @@ if (btnConfirmar) {
             })
             .catch(error => {
                 console.error('Error al agendar cita:', error);
-                alert('Error al agendar cita: ' + error.message + '\nVerifica que hayas iniciado sesión.');
+
+                // Mostrar error específico
+                let errorMessage = 'Error al agendar cita';
+                if (error.message.includes('401')) {
+                    errorMessage = 'Debes iniciar sesión para agendar una cita';
+                } else if (error.message.includes('400')) {
+                    errorMessage = 'Datos inválidos. Verifica la información ingresada';
+                } else {
+                    errorMessage = 'Error al agendar cita: ' + error.message;
+                }
+
+                alert(errorMessage);
 
                 // Restaurar botón
                 btnConfirmar.disabled = false;
-                btnConfirmar.textContent = 'Confirmar cita';
+                btnConfirmar.textContent = originalText;
             });
     });
 }
@@ -147,7 +219,13 @@ if (citasContainer) {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        citasContainer.innerHTML = '<div class="alert alert-warning">Debes iniciar sesión para ver tus citas. <a href="./login.html">Iniciar sesión</a></div>';
+        citasContainer.innerHTML = `
+            <div class="alert alert-warning">
+                <h4>Inicia sesión para ver tus citas</h4>
+                <p>Para acceder a tu historial de citas, debes iniciar sesión.</p>
+                <a href="./login.html" class="btn btn-primary">Iniciar sesión</a>
+            </div>
+        `;
         return;
     }
 
@@ -167,8 +245,9 @@ if (citasContainer) {
             citasContainer.innerHTML = `
             <div class="alert alert-info">
                 <h4>¡Hola ${usuario.nombre || 'Usuario'}!</h4>
-                <p>La funcionalidad de mostrar citas está en desarrollo.</p>
-                <p>Una vez que tengas tu API lista, aquí se mostrarán todas tus citas.</p>
+                <p>La funcionalidad de mostrar el historial de citas está en desarrollo.</p>
+                <p>Una vez que tengas tu API completa, aquí se mostrarán todas tus citas agendadas.</p>
+                <a href="./agendar-cita.html" class="btn btn-warning">Agendar nueva cita</a>
             </div>
         `;
         })
@@ -176,8 +255,9 @@ if (citasContainer) {
             console.error('Error al obtener usuario:', error);
             citasContainer.innerHTML = `
             <div class="alert alert-danger">
-                Error al cargar tus citas. 
-                <a href="./login.html">Iniciar sesión nuevamente</a>
+                <h4>Error al cargar tus citas</h4>
+                <p>Hubo un problema al acceder a tu información.</p>
+                <a href="./login.html" class="btn btn-primary">Iniciar sesión nuevamente</a>
             </div>
         `;
         });
@@ -229,6 +309,13 @@ if (rectificarForm) {
             return;
         }
 
+        // Validar checkbox de términos
+        const terminosCheckbox = document.getElementById('terminos-checkbox');
+        if (!terminosCheckbox || !terminosCheckbox.checked) {
+            alert('Debes aceptar los términos y condiciones');
+            return;
+        }
+
         const datosActualizados = {
             fecha: document.getElementById('nuevo-fecha').value,
             horario: document.getElementById('nuevo-hora').value,
@@ -236,6 +323,12 @@ if (rectificarForm) {
             estado: "Agregar revisión de frenos", // Ejemplo según tu documentación
             concesionario: document.getElementById('nuevo-sucursal').value
         };
+
+        // Validar que se ingresaron datos
+        if (!datosActualizados.fecha || !datosActualizados.horario || !datosActualizados.servicio || !datosActualizados.concesionario) {
+            alert('Por favor, completa todos los campos para rectificar la cita');
+            return;
+        }
 
         fetch(API_URL + '/citas/' + idCita, {
             method: 'PUT',

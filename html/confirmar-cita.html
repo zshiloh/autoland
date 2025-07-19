@@ -246,15 +246,13 @@
             const datosAgendar = JSON.parse(localStorage.getItem('datosAgendar') || '{}');
             const datosPersonales = JSON.parse(localStorage.getItem('datosPersonales') || '{}');
 
-            // Vehículo y cita
+            // Vehículo y datos personales
             document.getElementById('placa-value').textContent = datosAgendar.placa || '-';
             document.getElementById('marca-value').textContent = datosAgendar.marca || '-';
             document.getElementById('modelo-value').textContent = datosAgendar.modelo || '-';
             document.getElementById('ano-value').textContent = datosAgendar.año || '-';
             document.getElementById('servicio-value').textContent = datosAgendar.servicio || '-';
             document.getElementById('sucursal-value').textContent = datosAgendar.sucursal || '-';
-            document.getElementById('fecha-value').textContent = datosAgendar.fecha || '-';
-            document.getElementById('hora-value').textContent = datosAgendar.hora || '-';
 
             // Datos personales
             document.getElementById('tipo-documento-value').textContent = datosPersonales.tipoDocumento || '-';
@@ -263,6 +261,12 @@
             document.getElementById('apellidos-value').textContent = datosPersonales.apellidos || '-';
             document.getElementById('email-value').textContent = datosPersonales.email || '-';
             document.getElementById('celular-value').textContent = datosPersonales.telefono || '-';
+
+            // INFORMACIÓN DE LA CITA - CORREGIDO:
+            document.getElementById('fecha-value').textContent = datosAgendar.fecha || '-';
+            document.getElementById('hora-value').textContent = datosAgendar.hora || '-';
+            document.getElementById('sucursal-cita-value').textContent = datosAgendar.sucursal || '-';
+            document.getElementById('servicio-cita-value').textContent = datosAgendar.servicio || '-';
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
