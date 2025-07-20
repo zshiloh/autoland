@@ -1,9 +1,8 @@
-const API_URL = 'http://localhost:8081/api';
+// contacto.js - ESTE archivo define API_URL para todos
+window.API_URL = 'http://localhost:8081/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     const formulario = document.getElementById('form-contacto');
-    const modal = document.getElementById('modalContacto');
-    const mensaje = document.getElementById('mensaje');
 
     if (!formulario) return;
 
@@ -41,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch(`${API_URL}/contacto`, {
+            const response = await fetch(`${window.API_URL}/contacto`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

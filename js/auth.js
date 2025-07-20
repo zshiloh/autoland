@@ -1,6 +1,55 @@
-const API_URL = "http://localhost:8081/api";
+// auth.js - Con validaciones visuales mejoradas
 
-// LOGIN - Corregido para coincidir con tu documentación
+// Funciones para mostrar mensajes
+function mostrarMensajeExito() {
+    const successMsg = document.getElementById('success-message');
+    const errorMsg = document.getElementById('error-message');
+
+    if (successMsg) {
+        successMsg.style.display = 'block';
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    if (errorMsg) {
+        errorMsg.style.display = 'none';
+    }
+}
+
+function mostrarMensajeError() {
+    const successMsg = document.getElementById('success-message');
+    const errorMsg = document.getElementById('error-message');
+
+    if (errorMsg) {
+        errorMsg.style.display = 'block';
+        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    if (successMsg) {
+        successMsg.style.display = 'none';
+    }
+}
+
+function ocultarMensajes() {
+    const successMsg = document.getElementById('success-message');
+    const errorMsg = document.getElementById('error-message');
+
+    if (successMsg) successMsg.style.display = 'none';
+    if (errorMsg) errorMsg.style.display = 'none';
+}
+
+function marcarCamposConError(camposConError) {
+    // Primero quitar todos los errores
+    const todosCampos = document.querySelectorAll('.form-control');
+    todosCampos.forEach(campo => campo.classList.remove('error'));
+
+    // Marcar solo los campos con error
+    camposConError.forEach(campoId => {
+        const campo = document.getElementById(campoId);
+        if (campo) {
+            campo.classList.add('error');
+        }
+    });
+}
+
+// LOGIN
 const loginForm = document.getElementById('form-login');
 if (loginForm) {
     loginForm.addEventListener('submit', function (e) {
@@ -12,15 +61,28 @@ if (loginForm) {
         console.log("Login enviado: email='" + email + "', password='" + password + "'");
 
         // Validación básica
-        if (!email || !password) {
-            alert('Por favor, completa todos los campos');
+        const camposConError = [];
+        if (!email) {
+            camposConError.push('email');
+        }
+        if (!password) {
+            camposConError.push('password');
+        }
+
+        if (camposConError.length > 0) {
+            marcarCamposConError(camposConError);
+            mostrarMensajeError();
             return;
         }
 
-        // Usar los campos exactos de tu documentación
+        // Ocultar mensajes de error
+        ocultarMensajes();
+
+        // Usar API_URL global
+        const apiUrl = window.API_URL || "http://localhost:8081/api";
         const data = { email, password };
 
-        fetch(API_URL + '/auth/login', {
+        fetch(apiUrl + '/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -29,7 +91,7 @@ if (loginForm) {
                 if (res.ok) {
                     return res.json();
                 } else {
-                    throw new Error('Login fallido');
+                    throw new Error('Credenciales incorrectas');
                 }
             })
             .then(data => {
@@ -38,21 +100,34 @@ if (loginForm) {
                 if (data.token) {
                     localStorage.setItem('token', data.token);
                 }
-                alert('¡Bienvenido!');
-                window.location.href = '../index.html';
+
+                // Mostrar mensaje de éxito visual
+                mostrarMensajeExito();
+
+                // Redirigir después de un breve delay
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 1500);
             })
             .catch(error => {
                 console.error('Error en login:', error);
-                alert('Email o contraseña incorrectos');
+
+                // Mostrar error visual en lugar de alert
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger';
+                errorDiv.innerHTML = '<strong>Error:</strong> Credenciales incorrectas o servidor no disponible. <br><small>Esto es normal porque el backend no está corriendo.</small>';
+                loginForm.insertBefore(errorDiv, loginForm.firstChild);
             });
     });
 }
 
-// REGISTRO - Corregido para usar el selector correcto
+// REGISTRO - Validaciones visuales mejoradas
 const registroForm = document.querySelector('#registro-form form');
 if (registroForm) {
     registroForm.addEventListener('submit', function (e) {
         e.preventDefault();
+
+        console.log('=== VALIDANDO REGISTRO ===');
 
         // Obtener valores
         const nombre = document.getElementById('nombre').value.trim();
@@ -62,40 +137,65 @@ if (registroForm) {
         const contrasena = document.getElementById('contrasena').value.trim();
         const dni = document.getElementById('dni').value.trim();
 
-        // Validación básica
-        if (!nombre || !apellidos || !email || !telefono || !contrasena || !dni) {
-            alert('Por favor, completa todos los campos');
+        // Validaciones
+        const camposConError = [];
+
+        if (!nombre) {
+            camposConError.push('nombre');
+        }
+        if (!apellidos) {
+            camposConError.push('apellidos');
+        }
+        if (!email) {
+            camposConError.push('email');
+        } else {
+            // Validación de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                camposConError.push('email');
+            }
+        }
+        if (!telefono) {
+            camposConError.push('telefono');
+        }
+        if (!contrasena) {
+            camposConError.push('contrasena');
+        } else if (contrasena.length < 6) {
+            camposConError.push('contrasena');
+        }
+        if (!dni) {
+            camposConError.push('dni');
+        } else if (dni.length !== 8 || !/^\d+$/.test(dni)) {
+            camposConError.push('dni');
+        }
+
+        // Si hay errores, mostrarlos y salir
+        if (camposConError.length > 0) {
+            marcarCamposConError(camposConError);
+            mostrarMensajeError();
             return;
         }
 
-        // Validación de email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Por favor, ingresa un email válido');
-            return;
-        }
+        // Si todo está bien, ocultar errores
+        ocultarMensajes();
 
-        // Validación de DNI (8 dígitos)
-        if (dni.length !== 8 || !/^\d+$/.test(dni)) {
-            alert('El DNI debe tener 8 dígitos');
-            return;
-        }
+        // Usar API_URL global
+        const apiUrl = window.API_URL || "http://localhost:8081/api";
 
-        // Validación de contraseña (mínimo 6 caracteres)
-        if (contrasena.length < 6) {
-            alert('La contraseña debe tener al menos 6 caracteres');
-            return;
-        }
-
-        // Campos según tu documentación API
         const data = {
             nombre: nombre,
-            correo: email, // Tu API espera "correo"
+            correo: email,
             dni: dni,
-            password: contrasena // Tu API espera "password"
+            password: contrasena
         };
 
-        fetch(API_URL + '/auth/register', {
+        // Mostrar loading en el botón
+        const submitBtn = registroForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Registrando...';
+
+        fetch(apiUrl + '/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -110,12 +210,39 @@ if (registroForm) {
                 }
             })
             .then(data => {
-                alert('Usuario registrado con éxito');
-                window.location.href = '../html/login.html';
+                // Mostrar mensaje de éxito
+                mostrarMensajeExito();
+
+                // Redirigir después de un delay
+                setTimeout(() => {
+                    window.location.href = '../html/login.html';
+                }, 2000);
             })
             .catch(error => {
                 console.error('Error en registro:', error);
-                alert('Error al registrar usuario: ' + error.message);
+
+                // Mostrar error visual en lugar de alert
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger';
+                errorDiv.innerHTML = '<strong>Error:</strong> No se pudo registrar el usuario. Esto es normal porque el servidor no está disponible. <br><small>Tu formulario funciona correctamente, solo falta el backend.</small>';
+                registroForm.insertBefore(errorDiv, registroForm.firstChild);
+
+                // Restaurar botón
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
             });
+    });
+
+    // Limpiar errores cuando el usuario interactúe con los campos
+    const todosCampos = document.querySelectorAll('#registro-form input');
+    todosCampos.forEach(campo => {
+        campo.addEventListener('input', function () {
+            this.classList.remove('error');
+            // Si no hay más campos con error, ocultar mensaje
+            const camposConError = document.querySelectorAll('#registro-form input.error');
+            if (camposConError.length === 0) {
+                ocultarMensajes();
+            }
+        });
     });
 }

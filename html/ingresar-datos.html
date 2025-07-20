@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="ingresar-datos-page">
 
 <head>
     <meta charset="UTF-8">
@@ -101,6 +101,14 @@
                 </aside>
 
                 <section class="col-lg-9 form-section">
+                    <div class="success-message" id="success-message">
+                        ✅ Todos los campos están completos. Puedes continuar al siguiente paso.
+                    </div>
+
+                    <div class="error-message" id="error-message">
+                        ⚠️ Por favor, completa todos los campos marcados en rojo para continuar.
+                    </div>
+
                     <form id="datos-personales-form">
                         <div class="row mb-3">
                             <div class="col-lg-6">
@@ -192,19 +200,7 @@
             </div>
         </div>
     </footer>
-    <script>
-        document.getElementById('btn-siguiente').addEventListener('click', function (e) {
-            const datosPersonales = {
-                tipoDocumento: document.getElementById('tipo-documento').value,
-                numeroDocumento: document.getElementById('numero-documento').value,
-                nombre: document.getElementById('nombre').value,
-                apellidos: document.getElementById('apellidos').value,
-                email: document.getElementById('email').value,
-                telefono: document.getElementById('telefono').value
-            };
-            localStorage.setItem('datosPersonales', JSON.stringify(datosPersonales));
-        });
-    </script>
+    <script src="../js/contacto.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/citas.js"></script>
 </body>

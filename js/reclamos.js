@@ -1,10 +1,10 @@
-const API_URL = "http://localhost:8081/api";
+// reclamos.js - SIN declarar API_URL
 
 const formReclamo = document.getElementById('form-reclamo');
 if (formReclamo) {
-    formReclamo.addEventListener('submit', function(e) {
+    formReclamo.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         // Validar que todos los campos requeridos estén llenos
         const tipo = formReclamo.tipo.value;
         const servicio = formReclamo.servicio.value;
@@ -38,8 +38,7 @@ if (formReclamo) {
             tipo: tipo,
             servicio: servicio,
             motivo: motivo,
-            local: local,
-            // Puedes agregar más campos si los tienes en el formulario de datos personales
+            local: local
         };
 
         // Mostrar mensaje de carga
@@ -48,31 +47,34 @@ if (formReclamo) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Enviando...';
 
-        fetch(API_URL + '/reclamos', {
+        // Usar API_URL global
+        const apiUrl = window.API_URL || "http://localhost:8081/api";
+
+        fetch(apiUrl + '/reclamos', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            } else {
-                throw new Error('Error al enviar reclamo');
-            }
-        })
-        .then(data => {
-            alert('Su reclamo ha sido procesado exitosamente. Nos pondremos en contacto con usted pronto.');
-            formReclamo.reset();
-            window.location.href = '../index.html';
-        })
-        .catch(error => {
-            console.error('Error al enviar reclamo:', error);
-            alert('Error al enviar reclamo. Por favor, intenta nuevamente.');
-        })
-        .finally(() => {
-            // Restaurar botón
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-        });
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error('Error al enviar reclamo');
+                }
+            })
+            .then(data => {
+                alert('Su reclamo ha sido procesado exitosamente. Nos pondremos en contacto con usted pronto.');
+                formReclamo.reset();
+                window.location.href = '../index.html';
+            })
+            .catch(error => {
+                console.error('Error al enviar reclamo:', error);
+                alert('Error al enviar reclamo. Por favor, intenta nuevamente.');
+            })
+            .finally(() => {
+                // Restaurar botón
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            });
     });
 }

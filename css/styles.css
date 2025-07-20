@@ -102,6 +102,127 @@
   margin-top: 10px;
 }
 
+/* ===== ESTILOS EXTRAÍDOS DE LOGIN.HTML ===== */
+#login-page .form-control.error {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+#login-page .success-message {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+#login-page .error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+/* ===== ESTILOS EXTRAÍDOS DE REGISTRARSE.HTML ===== */
+#registrarse-page .form-control.error {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+#registrarse-page .success-message {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+#registrarse-page .error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+/* ===== ESTILOS EXTRAÍDOS DE INGRESAR-DATOS.HTML ===== */
+#ingresar-datos-page .form-control.error,
+#ingresar-datos-page .form-select.error {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+#ingresar-datos-page .success-message {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+#ingresar-datos-page .error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+/* ===== ESTILOS EXTRAÍDOS DE AGENDAR-CITA.HTML ===== */
+#agendar-cita-page .form-control.error,
+#agendar-cita-page .form-select.error {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+#agendar-cita-page .success-message {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+#agendar-cita-page .error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+/* ===== ESTILOS EXTRAÍDOS DE CONFIRMAR-CITA.HTML ===== */
+#confirmar-cita-page .checkbox-error {
+  color: #dc3545;
+  font-size: 0.9em;
+  margin-top: 5px;
+  display: none;
+}
+
+#confirmar-cita-page .checkbox-section.error .custom-checkbox {
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #f8d7da;
+}
+
 /* terminos.html */
 
 .terms-container {
@@ -978,8 +1099,7 @@ header {
   text-decoration: none;
 }
 
-/* registrarse.html */
-
+/* ===== ESTILOS DE LOGIN.HTML ===== */
 #body-login {
   background-color: #f5f5f5;
   display: flex;
@@ -1086,13 +1206,8 @@ header {
 }
 
 @media (max-width: 768px) {
-  #formulario {
+  #formulario-login {
     padding: 20px;
-  }
-
-  #registro-imagen {
-    width: 120%;
-    height: 150px;
   }
 }
 
@@ -1101,15 +1216,14 @@ header {
     font-size: 20px;
   }
 
-  #formulario input,
-  #formulario button {
+  #formulario-login input,
+  #formulario-login button {
     font-size: 14px;
     padding: 10px;
   }
 }
 
-/* registrarse.html */
-
+/* ===== ESTILOS DE REGISTRARSE.HTML ===== */
 #body-registro {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -1178,7 +1292,7 @@ header {
   padding: 10px;
   border: 1px solid #eb6213;
   border-radius: 5px;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 #registro-form button {
