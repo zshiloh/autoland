@@ -1,14 +1,5 @@
 // citas.js - Con mensaje único arriba
 
-// Función para obtener headers con token de autorización
-function getAuthHeaders() {
-    const token = localStorage.getItem('token');
-    return {
-        'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : ''
-    };
-}
-
 // Función para mostrar mensaje de éxito
 function mostrarMensajeExito() {
     const successMsg = document.getElementById('success-message');
@@ -278,7 +269,7 @@ if (btnSiguiente) {
     });
 }
 
-// Confirmar cita y enviar al backend
+// Confirmar cita y enviar al backend - CORREGIDO CON TOKEN
 const btnConfirmar = document.getElementById('btn-confirmar');
 if (btnConfirmar) {
     btnConfirmar.addEventListener('click', function(e) {
@@ -307,16 +298,30 @@ if (btnConfirmar) {
             return;
         }
         
+        // VERIFICAR TOKEN - PARTE CRÍTICA CORREGIDA
+        const token = localStorage.getItem('token');
+        if (!token) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-danger';
+            errorDiv.innerHTML = '<strong>Error:</strong> Debes iniciar sesión para agendar una cita. <a href="./login.html">Ir al login</a>';
+            document.querySelector('.info-section').insertBefore(errorDiv, document.querySelector('.info-card'));
+            return;
+        }
+        
         // Usar API_URL (debe estar definido en contacto.js)
         const apiUrl = window.API_URL || "http://localhost:8081/api";
         
-        // Estructurar los datos según tu documentación API
+        // Estructurar los datos según el backend
         const cita = {
+            placa: datosAgendar.placa,
+            marca: datosAgendar.marca,
+            modelo: datosAgendar.modelo,
+            anio: datosAgendar.año,
+            servicio: datosAgendar.servicio,
+            sucursal: datosAgendar.sucursal,
             fecha: datosAgendar.fecha,
             horario: datosAgendar.hora,
-            servicio: datosAgendar.servicio,
-            estado: "pendiente",
-            concesionario: datosAgendar.sucursal
+            observaciones: ""
         };
 
         // Mostrar loading
@@ -324,12 +329,21 @@ if (btnConfirmar) {
         btnConfirmar.disabled = true;
         btnConfirmar.textContent = 'Enviando...';
 
+        console.log('=== CREANDO CITA ===');
+        console.log('Token:', token ? 'Presente' : 'Ausente');
+        console.log('Datos de cita:', cita);
+
+        // PETICIÓN CORREGIDA CON TOKEN
         fetch(apiUrl + '/citas', {
             method: 'POST',
-            headers: getAuthHeaders(),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`  // ← TOKEN AGREGADO AQUÍ
+            },
             body: JSON.stringify(cita)
         })
         .then(res => {
+            console.log('Respuesta status:', res.status);
             if (res.ok) {
                 return res.json();
             } else {
@@ -339,6 +353,8 @@ if (btnConfirmar) {
             }
         })
         .then(data => {
+            console.log('Cita creada exitosamente:', data);
+            
             // Limpiar datos del localStorage
             localStorage.removeItem('datosAgendar');
             localStorage.removeItem('datosPersonales');
@@ -360,7 +376,7 @@ if (btnConfirmar) {
             // Mostrar error visual en lugar de alert
             const errorDiv = document.createElement('div');
             errorDiv.className = 'alert alert-danger';
-            errorDiv.innerHTML = '<strong>Error:</strong> No se pudo agendar la cita. Esto es normal porque el servidor no está disponible. <br><small>Tu formulario funciona correctamente, solo falta el backend.</small>';
+            errorDiv.innerHTML = '<strong>Error:</strong> No se pudo agendar la cita: ' + error.message;
             document.querySelector('.info-section').insertBefore(errorDiv, document.querySelector('.info-card'));
             
             // Restaurar botón
@@ -433,7 +449,10 @@ if (citasContainer) {
         const apiUrl = window.API_URL || "http://localhost:8081/api";
         
         fetch(apiUrl + '/auth/me', {
-            headers: getAuthHeaders()
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
         })
         .then(res => {
             if (res.ok) {

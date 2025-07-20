@@ -121,7 +121,7 @@ if (loginForm) {
     });
 }
 
-// REGISTRO - Validaciones visuales mejoradas
+// REGISTRO - Validaciones visuales mejoradas CON TELEFONO CORREGIDO
 const registroForm = document.querySelector('#registro-form form');
 if (registroForm) {
     registroForm.addEventListener('submit', function (e) {
@@ -182,12 +182,17 @@ if (registroForm) {
         // Usar API_URL global
         const apiUrl = window.API_URL || "http://localhost:8081/api";
 
+        // CORREGIDO: Incluir telefono y apellidos
         const data = {
             nombre: nombre,
             correo: email,
             dni: dni,
-            password: contrasena
+            password: contrasena,
+            telefono: telefono,     // ← AGREGADO
+            apellidos: apellidos    // ← AGREGADO
         };
+
+        console.log('Datos a enviar:', data);
 
         // Mostrar loading en el botón
         const submitBtn = registroForm.querySelector('button[type="submit"]');
