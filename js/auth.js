@@ -115,7 +115,7 @@ if (loginForm) {
                 // Mostrar error visual en lugar de alert
                 const errorDiv = document.createElement('div');
                 errorDiv.className = 'alert alert-danger';
-                errorDiv.innerHTML = '<strong>Error:</strong> Credenciales incorrectas o servidor no disponible. <br><small>Esto es normal porque el backend no está corriendo.</small>';
+                errorDiv.innerHTML = '<strong>Error:</strong> Credenciales incorrectas o servidor no disponible';
                 loginForm.insertBefore(errorDiv, loginForm.firstChild);
             });
     });
@@ -229,7 +229,7 @@ if (registroForm) {
                 // Mostrar error visual en lugar de alert
                 const errorDiv = document.createElement('div');
                 errorDiv.className = 'alert alert-danger';
-                errorDiv.innerHTML = '<strong>Error:</strong> No se pudo registrar el usuario. Esto es normal porque el servidor no está disponible. <br><small>Tu formulario funciona correctamente, solo falta el backend.</small>';
+                errorDiv.innerHTML = '<strong>Error:</strong> No se pudo registrar el usuario. Verifica los datos ingresados y vuelve a intentarlo.';
                 registroForm.insertBefore(errorDiv, registroForm.firstChild);
 
                 // Restaurar botón
