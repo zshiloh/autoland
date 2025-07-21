@@ -51,6 +51,7 @@
             </nav>
         </div>
     </header>
+
     <section id="progreso-section" class="container-fluid">
         <div class="container">
             <div class="row">
@@ -86,7 +87,6 @@
         </div>
     </section>
 
-
     <main id="main-contenido" class="container-fluid">
         <div class="container">
             <div class="row content-section">
@@ -101,6 +101,25 @@
                 </aside>
 
                 <section class="col-lg-9 info-section">
+                    <!-- Mensajes de estado (ocultos por defecto) -->
+                    <div class="alert alert-danger" id="error-faltan-datos-message" style="display: none;">
+                        <strong>Error:</strong> Faltan datos de la cita. <a href="./agendar-cita.html">Volver a llenar
+                            el formulario</a>
+                    </div>
+
+                    <div class="alert alert-danger" id="error-no-autenticado-message" style="display: none;">
+                        <strong>Error:</strong> Debes iniciar sesión para agendar una cita. <a href="./login.html">Ir al
+                            login</a>
+                    </div>
+
+                    <div class="alert alert-success" id="cita-agendada-exitosa-message" style="display: none;">
+                        <strong>¡Éxito!</strong> Tu cita fue agendada correctamente. Serás redirigido al inicio...
+                    </div>
+
+                    <div class="alert alert-danger" id="error-general-cita-message" style="display: none;">
+                        <strong>Error:</strong> No se pudo agendar la cita: <span id="error-general-text"></span>
+                    </div>
+
                     <div class="info-card" id="vehiculo-info-card">
                         <div class="info-card-header">
                             INFORMACIÓN DEL VEHÍCULO Y CLIENTE
@@ -235,6 +254,7 @@
             </div>
         </div>
     </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const datosAgendar = JSON.parse(localStorage.getItem('datosAgendar') || '{}');

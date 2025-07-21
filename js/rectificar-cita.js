@@ -1,40 +1,64 @@
-// rectificar-cita.js - Funcionalidad completa para rectificar citas CON VALIDACIÓN DE AUTENTICACIÓN
+// rectificar-cita.js - Funcionalidad refactorizada sin HTML hardcodeado
 
 document.addEventListener("DOMContentLoaded", function () {
     const buscarBtn = document.getElementById("buscar-cita-btn");
     const editarSection = document.getElementById("editar-cita-section");
     const confirmarBtn = document.getElementById("btn-confirmar");
 
+    // Referencias a elementos de mensajes pre-existentes en HTML
+    const authRequiredMessage = document.getElementById("auth-required-message");
+    const citaEncontradaMessage = document.getElementById("cita-encontrada-message");
+    const errorGeneralMessage = document.getElementById("error-general-message");
+    const errorText = document.getElementById("error-text");
+    const actualizacionExitosaMessage = document.getElementById("actualizacion-exitosa-message");
+
     let citaEncontrada = null; // Almacenar datos de la cita encontrada
 
-    // Función para verificar autenticación y mostrar mensaje
-    function verificarYMostrarMensajeAuth() {
+    // Función para ocultar todos los mensajes
+    function ocultarTodosLosMensajes() {
+        authRequiredMessage.style.display = 'none';
+        citaEncontradaMessage.style.display = 'none';
+        errorGeneralMessage.style.display = 'none';
+        actualizacionExitosaMessage.style.display = 'none';
+    }
+
+    // Función para mostrar mensaje de autenticación requerida
+    function mostrarMensajeAuth() {
+        ocultarTodosLosMensajes();
+        authRequiredMessage.style.display = 'block';
+        authRequiredMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Función para mostrar mensaje de éxito al encontrar cita
+    function mostrarCitaEncontrada() {
+        ocultarTodosLosMensajes();
+        citaEncontradaMessage.style.display = 'block';
+        citaEncontradaMessage.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Función para mostrar mensaje de error general
+    function mostrarError(mensaje) {
+        ocultarTodosLosMensajes();
+        errorText.textContent = mensaje;
+        errorGeneralMessage.style.display = 'block';
+        errorGeneralMessage.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Función para mostrar mensaje de actualización exitosa
+    function mostrarActualizacionExitosa() {
+        ocultarTodosLosMensajes();
+        actualizacionExitosaMessage.style.display = 'block';
+        actualizacionExitosaMessage.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Función para verificar autenticación
+    function verificarAutenticacion() {
         const token = localStorage.getItem('token');
         if (!token) {
-            // Limpiar alertas anteriores
-            document.querySelectorAll('.alert-warning').forEach(alert => {
-                if (alert.innerHTML.includes('Inicia sesión')) {
-                    alert.remove();
-                }
-            });
-
-            // Mostrar mensaje de que debe iniciar sesión
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'alert alert-warning';
-            alertDiv.innerHTML = `
-                <h4>Inicia sesión para buscar tu cita</h4>
-                <p>Para acceder a la funcionalidad de rectificar citas, debes iniciar sesión primero.</p>
-                <a href="./login.html" class="btn btn-primary">Iniciar sesión</a>
-            `;
-
-            // Insertar el mensaje
-            const formSection = document.querySelector('.col-lg-9') || document.querySelector('section');
-            const firstElement = formSection.querySelector('.alert-info') || formSection.querySelector('h3') || formSection.firstChild;
-            formSection.insertBefore(alertDiv, firstElement);
-
-            return false; // No está autenticado
+            mostrarMensajeAuth();
+            return false;
         }
-        return true; // Está autenticado
+        return true;
     }
 
     // Función para mostrar/ocultar error del checkbox
@@ -43,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const errorMsg = document.getElementById('checkbox-error');
 
         if (mostrar) {
-            // Solo agregar clase - CSS maneja todo el estilo
             terminosSection.classList.add('error');
             if (errorMsg) {
                 errorMsg.style.display = 'block';
@@ -53,7 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             }
         } else {
-            // Solo quitar clase
             terminosSection.classList.remove('error');
             if (errorMsg) {
                 errorMsg.style.display = 'none';
@@ -67,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
 
             // VERIFICAR AUTENTICACIÓN ANTES DE BUSCAR
-            if (!verificarYMostrarMensajeAuth()) {
+            if (!verificarAutenticacion()) {
                 return;
             }
 
@@ -79,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Validar campos requeridos
             if (!placa || !dni) {
-                alert("Por favor, ingresa la placa y el DNI para buscar la cita.");
+                mostrarError("Por favor, ingresa la placa y el DNI para buscar la cita.");
                 return;
             }
 
@@ -104,12 +126,12 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Datos de búsqueda:", datosBusqueda);
             console.log("Token disponible:", token ? "SÍ" : "NO");
 
-            // Llamar al endpoint de búsqueda CON TOKEN - MODIFICADO
+            // Llamar al endpoint de búsqueda CON TOKEN
             fetch(apiUrl + '/citas/buscar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`  // ← LÍNEA AGREGADA
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(datosBusqueda)
             })
@@ -137,31 +159,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("nuevo-servicio").value = data.servicio;
                     document.getElementById("nuevo-sucursal").value = data.sucursal;
 
-                    // Limpiar alertas anteriores
-                    document.querySelectorAll('.alert').forEach(alert => alert.remove());
-
                     // Mostrar mensaje de éxito
-                    const successDiv = document.createElement('div');
-                    successDiv.className = 'alert alert-success';
-                    successDiv.innerHTML = '<strong>¡Cita encontrada!</strong> Puedes modificar los datos abajo.';
-                    const formSection = document.querySelector('.col-lg-9');
-                    formSection.insertBefore(successDiv, formSection.querySelector('h3'));
+                    mostrarCitaEncontrada();
 
                     // Scroll hacia la sección de edición
                     editarSection.scrollIntoView({ behavior: 'smooth' });
                 })
                 .catch(error => {
                     console.error('Error al buscar cita:', error);
-
-                    // Limpiar alertas anteriores
-                    document.querySelectorAll('.alert').forEach(alert => alert.remove());
-
-                    // Mostrar error
-                    const errorDiv = document.createElement('div');
-                    errorDiv.className = 'alert alert-danger';
-                    errorDiv.innerHTML = '<strong>Error:</strong> ' + error.message;
-                    const formSection = document.querySelector('.col-lg-9');
-                    formSection.insertBefore(errorDiv, formSection.querySelector('h3'));
+                    mostrarError(error.message);
 
                     // Restaurar botón
                     buscarBtn.disabled = false;
@@ -176,15 +182,17 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
 
             if (!citaEncontrada) {
-                alert("Primero debes buscar una cita antes de confirmar cambios.");
+                mostrarError("Primero debes buscar una cita antes de confirmar cambios.");
                 return;
             }
 
             // Verificar que el usuario esté logueado
             const token = localStorage.getItem('token');
             if (!token) {
-                alert("Debes iniciar sesión para modificar una cita.");
-                window.location.href = './login.html';
+                mostrarError("Debes iniciar sesión para modificar una cita.");
+                setTimeout(() => {
+                    window.location.href = './login.html';
+                }, 2000);
                 return;
             }
 
@@ -206,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Validar campos requeridos
             if (!nuevaFecha || !nuevaHora || !nuevoServicio || !nuevaSucursal) {
-                alert("Por favor, completa todos los campos para actualizar la cita.");
+                mostrarError("Por favor, completa todos los campos para actualizar la cita.");
                 return;
             }
 
@@ -234,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("ID Cita:", citaEncontrada.id_cita);
             console.log("Datos de actualización:", datosActualizacion);
 
-            // Llamar al endpoint de actualización CON TOKEN - YA ESTABA BIEN
+            // Llamar al endpoint de actualización CON TOKEN
             fetch(apiUrl + `/citas/${citaEncontrada.id_cita}`, {
                 method: 'PUT',
                 headers: {
@@ -256,25 +264,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(data => {
                     console.log("Cita actualizada exitosamente:", data);
 
-                    // Limpiar alertas anteriores
-                    document.querySelectorAll('.alert').forEach(alert => alert.remove());
-
                     // Mostrar mensaje de éxito
-                    const successDiv = document.createElement('div');
-                    successDiv.className = 'alert alert-success';
-                    successDiv.innerHTML = '<strong>¡Éxito!</strong> Tu cita ha sido actualizada correctamente. Serás redirigido al inicio...';
-
-                    const formSection = document.querySelector('.col-lg-9');
-                    const h3Element = formSection.querySelector('h3');
-                    if (formSection && h3Element) {
-                        formSection.insertBefore(successDiv, h3Element);
-                    } else {
-                        // Si no encuentra el h3, agregar al inicio
-                        formSection.insertAdjacentElement('afterbegin', successDiv);
-                    }
-
-                    // Scroll hacia arriba para ver el mensaje
-                    successDiv.scrollIntoView({ behavior: 'smooth' });
+                    mostrarActualizacionExitosa();
 
                     // Redirigir después de 3 segundos
                     setTimeout(() => {
@@ -283,28 +274,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                 .catch(error => {
                     console.error('Error al actualizar cita:', error);
+                    mostrarError(error.message);
 
-                    // Limpiar alertas anteriores
-                    document.querySelectorAll('.alert-danger').forEach(alert => alert.remove());
-
-                    // Mostrar error
-                    const errorDiv = document.createElement('div');
-                    errorDiv.className = 'alert alert-danger';
-                    errorDiv.innerHTML = '<strong>Error:</strong> ' + error.message;
-
-                    const formSection = document.querySelector('.col-lg-9');
-                    const h3Element = formSection.querySelector('h3');
-                    if (formSection && h3Element) {
-                        formSection.insertBefore(errorDiv, h3Element);
-                    } else {
-                        formSection.insertAdjacentElement('afterbegin', errorDiv);
-                    }
                     // Restaurar botón
                     confirmarBtn.disabled = false;
                     confirmarBtn.textContent = originalText;
-
-                    // Scroll hacia arriba para ver el error
-                    errorDiv.scrollIntoView({ behavior: 'smooth' });
                 });
         });
     }

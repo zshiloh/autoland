@@ -1,5 +1,56 @@
-// contacto.js - ESTE archivo define API_URL para todos
+// contacto.js - Refactorizado para usar notificaciones inline
+
 window.API_URL = 'http://localhost:8081/api';
+
+// Funciones para mostrar mensajes usando los mismos IDs que el resto de la app
+function mostrarMensajeExito() {
+    const successMsg = document.getElementById('success-message');
+    const errorMsg = document.getElementById('error-message');
+
+    if (successMsg) {
+        successMsg.style.display = 'block';
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    if (errorMsg) {
+        errorMsg.style.display = 'none';
+    }
+}
+
+function mostrarMensajeError() {
+    const successMsg = document.getElementById('success-message');
+    const errorMsg = document.getElementById('error-message');
+
+    if (errorMsg) {
+        errorMsg.style.display = 'block';
+        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    if (successMsg) {
+        successMsg.style.display = 'none';
+    }
+}
+
+function ocultarMensajes() {
+    const successMsg = document.getElementById('success-message');
+    const errorMsg = document.getElementById('error-message');
+
+    if (successMsg) successMsg.style.display = 'none';
+    if (errorMsg) errorMsg.style.display = 'none';
+}
+
+// Función para marcar campos con error
+function marcarCamposConError(campos) {
+    // Primero quitar todos los errores
+    const todosCampos = document.querySelectorAll('#form-contacto input, #form-contacto select, #form-contacto textarea');
+    todosCampos.forEach(campo => campo.classList.remove('error'));
+
+    // Marcar campos con error
+    campos.forEach(nombreCampo => {
+        const campo = document.querySelector(`#form-contacto [name="${nombreCampo}"]`);
+        if (campo) {
+            campo.classList.add('error');
+        }
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const formulario = document.getElementById('form-contacto');
@@ -8,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     formulario.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        // Ocultar mensajes anteriores
+        ocultarMensajes();
 
         const formData = new FormData(formulario);
         const data = {};
@@ -20,24 +74,50 @@ document.addEventListener('DOMContentLoaded', () => {
         delete data.tc;
         delete data.info;
 
-        // Validación básica
-        if (!data.nombre || !data.dni || !data.telefono || !data.email || !data.consulta) {
-            alert('Por favor, completa todos los campos obligatorios');
-            return;
+        // Validación básica con marcado de campos
+        const camposConError = [];
+
+        if (!data.nombre) {
+            camposConError.push('nombre');
+        }
+        if (!data.dni) {
+            camposConError.push('dni');
+        }
+        if (!data.telefono) {
+            camposConError.push('telefono');
+        }
+        if (!data.email) {
+            camposConError.push('email');
+        }
+        if (!data.consulta) {
+            camposConError.push('consulta');
         }
 
         // Validación de email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(data.email)) {
-            alert('Por favor, ingresa un email válido');
-            return;
+        if (data.email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                camposConError.push('email');
+            }
         }
 
         // Validación de DNI (8 dígitos)
-        if (data.dni.length !== 8 || !/^\d+$/.test(data.dni)) {
-            alert('El DNI debe tener 8 dígitos');
+        if (data.dni && (data.dni.length !== 8 || !/^\d+$/.test(data.dni))) {
+            camposConError.push('dni');
+        }
+
+        // Si hay errores, mostrarlos
+        if (camposConError.length > 0) {
+            marcarCamposConError(camposConError);
+            mostrarMensajeError();
             return;
         }
+
+        // Mostrar loading en botón
+        const submitBtn = formulario.querySelector('#boton-de-enviar');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
 
         try {
             const response = await fetch(`${window.API_URL}/contacto`, {
@@ -49,17 +129,59 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                alert('Mensaje enviado correctamente. Te contactaremos pronto.');
+                // Mostrar mensaje de éxito
+                mostrarMensajeExito();
                 formulario.reset();
+
+                // Redirigir después de 3 segundos (opcional)
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 3000);
             } else if (response.status === 400) {
                 const error = await response.text();
-                alert(`Error al enviar mensaje: ${error}`);
+                // Actualizar mensaje de error específico
+                const errorMsg = document.getElementById('error-message');
+                if (errorMsg) {
+                    errorMsg.innerHTML = `⚠️ Error al enviar mensaje: ${error}`;
+                }
+                mostrarMensajeError();
             } else {
-                alert('Error al enviar mensaje. Intenta nuevamente.');
+                mostrarMensajeError();
             }
         } catch (error) {
             console.error('Error al enviar mensaje:', error);
-            alert('Error al enviar mensaje. Verifica tu conexión e intenta más tarde.');
+            // Actualizar mensaje de error para problemas de conexión
+            const errorMsg = document.getElementById('error-message');
+            if (errorMsg) {
+                errorMsg.innerHTML = '⚠️ Error al enviar mensaje. Verifica tu conexión e intenta más tarde.';
+            }
+            mostrarMensajeError();
+        } finally {
+            // Restaurar botón
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
         }
+    });
+
+    // Limpiar errores cuando el usuario interactúe con los campos
+    const todosCampos = document.querySelectorAll('#form-contacto input, #form-contacto select, #form-contacto textarea');
+    todosCampos.forEach(campo => {
+        campo.addEventListener('input', function () {
+            this.classList.remove('error');
+            // Si no hay más campos con error, ocultar mensaje
+            const camposConError = document.querySelectorAll('#form-contacto .error');
+            if (camposConError.length === 0) {
+                ocultarMensajes();
+            }
+        });
+
+        campo.addEventListener('change', function () {
+            this.classList.remove('error');
+            // Si no hay más campos con error, ocultar mensaje
+            const camposConError = document.querySelectorAll('#form-contacto .error');
+            if (camposConError.length === 0) {
+                ocultarMensajes();
+            }
+        });
     });
 });

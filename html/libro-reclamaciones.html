@@ -86,6 +86,16 @@
 
             <div class="formulario-col">
               <h2>Enviar una solicitud</h2>
+
+              <!-- Mensajes de notificación inline (mismos IDs que el resto) -->
+              <div class="success-message" id="success-message" style="display: none;">
+                ✅ Su reclamo ha sido procesado exitosamente. Nos pondremos en contacto con usted pronto.
+              </div>
+
+              <div class="error-message" id="error-message" style="display: none;">
+                ⚠️ Por favor, completa todos los campos marcados en rojo correctamente.
+              </div>
+
               <form id="form-reclamo">
                 <select name="tipo" required>
                   <option value="" disabled selected>Tipo de solicitud</option>

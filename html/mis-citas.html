@@ -54,7 +54,31 @@
 
     <main class="container my-5">
         <h2 class="mb-4">Mis Citas</h2>
-        <div id="citas-lista"></div>
+
+        <!-- Contenedor donde se mostrará el contenido dinámico -->
+        <div id="citas-lista">
+            <!-- El contenido se generará dinámicamente por JavaScript -->
+        </div>
+
+        <!-- Elementos de mensaje pre-definidos para mejor práctica (ocultos por defecto) -->
+        <div class="alert alert-warning d-none" id="template-login-requerido">
+            <h4>Inicia sesión para ver tus citas</h4>
+            <p>Para acceder a tu historial de citas, debes iniciar sesión.</p>
+            <a href="./login.html" class="btn btn-primary">Iniciar sesión</a>
+        </div>
+
+        <div class="alert alert-info d-none" id="template-bienvenida-usuario">
+            <h4>¡Hola <span id="nombre-usuario-placeholder"></span>!</h4>
+            <p>La funcionalidad de mostrar el historial de citas está en desarrollo.</p>
+            <p>Una vez que tengas tu API completa, aquí se mostrarán todas tus citas agendadas.</p>
+            <a href="./agendar-cita.html" class="btn btn-warning">Agendar nueva cita</a>
+        </div>
+
+        <div class="alert alert-danger d-none" id="template-error-cargar">
+            <h4>Error al cargar tus citas</h4>
+            <p>Hubo un problema al acceder a tu información.</p>
+            <a href="./login.html" class="btn btn-primary">Iniciar sesión nuevamente</a>
+        </div>
     </main>
 
     <footer class="container-fluid bg-dark text-white py-4">

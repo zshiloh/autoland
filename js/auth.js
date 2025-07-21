@@ -1,6 +1,6 @@
-// auth.js - Con validaciones visuales mejoradas
+// auth.js - Refactorizado sin HTML hardcodeado
 
-// Funciones para mostrar mensajes
+// Funciones para mostrar mensajes usando elementos predefinidos en HTML
 function mostrarMensajeExito() {
     const successMsg = document.getElementById('success-message');
     const errorMsg = document.getElementById('error-message');
@@ -49,6 +49,35 @@ function marcarCamposConError(camposConError) {
     });
 }
 
+// Función para mostrar errores del servidor usando elementos predefinidos
+function mostrarErrorServidor(mensaje, esLogin = false) {
+    // Intentar usar primero elementos predefinidos en HTML
+    const errorServerElement = document.getElementById('error-servidor-message');
+    if (errorServerElement) {
+        const errorText = errorServerElement.querySelector('.error-text');
+        if (errorText) {
+            errorText.textContent = mensaje;
+        }
+        errorServerElement.style.display = 'block';
+        errorServerElement.scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
+
+    // Fallback: crear elemento dinámicamente si no existe el predefinido
+    const form = esLogin ? document.getElementById('form-login') : document.querySelector('#registro-form form');
+    if (!form) return;
+
+    // Limpiar alertas anteriores
+    const alertasAnteriores = form.querySelectorAll('.alert-danger');
+    alertasAnteriores.forEach(alerta => alerta.remove());
+
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'alert alert-danger';
+    errorDiv.innerHTML = `<strong>Error:</strong> ${mensaje}`;
+    form.insertBefore(errorDiv, form.firstChild);
+    errorDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
 // LOGIN
 const loginForm = document.getElementById('form-login');
 if (loginForm) {
@@ -82,6 +111,12 @@ if (loginForm) {
         const apiUrl = window.API_URL || "http://localhost:8081/api";
         const data = { email, password };
 
+        // Mostrar loading en botón
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Iniciando sesión...';
+
         fetch(apiUrl + '/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -111,17 +146,17 @@ if (loginForm) {
             })
             .catch(error => {
                 console.error('Error en login:', error);
-
-                // Mostrar error visual en lugar de alert
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'alert alert-danger';
-                errorDiv.innerHTML = '<strong>Error:</strong> Credenciales incorrectas o servidor no disponible';
-                loginForm.insertBefore(errorDiv, loginForm.firstChild);
+                mostrarErrorServidor('Credenciales incorrectas o servidor no disponible.', true);
+            })
+            .finally(() => {
+                // Restaurar botón
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
             });
     });
 }
 
-// REGISTRO - Validaciones visuales mejoradas CON TELEFONO CORREGIDO
+// REGISTRO - Validaciones visuales mejoradas
 const registroForm = document.querySelector('#registro-form form');
 if (registroForm) {
     registroForm.addEventListener('submit', function (e) {
@@ -182,14 +217,14 @@ if (registroForm) {
         // Usar API_URL global
         const apiUrl = window.API_URL || "http://localhost:8081/api";
 
-        // CORREGIDO: Incluir telefono y apellidos
+        // Datos para enviar al servidor
         const data = {
             nombre: nombre,
             correo: email,
             dni: dni,
             password: contrasena,
-            telefono: telefono,     // ← AGREGADO
-            apellidos: apellidos    // ← AGREGADO
+            telefono: telefono,
+            apellidos: apellidos
         };
 
         console.log('Datos a enviar:', data);
@@ -225,13 +260,9 @@ if (registroForm) {
             })
             .catch(error => {
                 console.error('Error en registro:', error);
-
-                // Mostrar error visual en lugar de alert
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'alert alert-danger';
-                errorDiv.innerHTML = '<strong>Error:</strong> No se pudo registrar el usuario. Verifica los datos ingresados y vuelve a intentarlo.';
-                registroForm.insertBefore(errorDiv, registroForm.firstChild);
-
+                mostrarErrorServidor('No se pudo registrar el usuario.', false);
+            })
+            .finally(() => {
                 // Restaurar botón
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
