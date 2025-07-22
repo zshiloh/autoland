@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AUTOLAND</title>
+    <title>Mis Citas | AUTOLAND</title>
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 
@@ -54,31 +55,177 @@
 
     <main class="container my-5">
         <h2 class="mb-4">Mis Citas</h2>
-
-        <!-- Contenedor donde se mostrará el contenido dinámico -->
-        <div id="citas-lista">
-            <!-- El contenido se generará dinámicamente por JavaScript -->
+        <div id="loading-container" class="text-center py-4" style="display: none;">
+            <div class="spinner-border text-warning" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-2">Cargando tus citas...</p>
         </div>
-
-        <!-- Elementos de mensaje pre-definidos para mejor práctica (ocultos por defecto) -->
-        <div class="alert alert-warning d-none" id="template-login-requerido">
-            <h4>Inicia sesión para ver tus citas</h4>
-            <p>Para acceder a tu historial de citas, debes iniciar sesión.</p>
-            <a href="./login.html" class="btn btn-primary">Iniciar sesión</a>
+        <div id="login-required-message" class="alert alert-warning" style="display: none;">
+            <h4 class="alert-heading">
+                <i class="fas fa-sign-in-alt"></i> Inicia sesión para ver tus citas
+            </h4>
+            <p>Para acceder a tu historial de citas, debes iniciar sesión con tu cuenta.</p>
+            <hr>
+            <a href="./login.html" class="btn btn-primary">
+                <i class="fas fa-user"></i> Iniciar sesión
+            </a>
+            <a href="./registrarse.html" class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-user-plus"></i> Crear cuenta
+            </a>
         </div>
-
-        <div class="alert alert-info d-none" id="template-bienvenida-usuario">
-            <h4>¡Hola <span id="nombre-usuario-placeholder"></span>!</h4>
-            <p>La funcionalidad de mostrar el historial de citas está en desarrollo.</p>
-            <p>Una vez que tengas tu API completa, aquí se mostrarán todas tus citas agendadas.</p>
-            <a href="./agendar-cita.html" class="btn btn-warning">Agendar nueva cita</a>
+        <div id="token-invalid-message" class="alert alert-danger" style="display: none;">
+            <h4 class="alert-heading">
+                <i class="fas fa-exclamation-triangle"></i> Sesión expirada
+            </h4>
+            <p>Tu sesión ha expirado. Por favor, inicia sesión nuevamente.</p>
+            <hr>
+            <a href="./login.html" class="btn btn-primary">
+                <i class="fas fa-sign-in-alt"></i> Iniciar sesión nuevamente
+            </a>
         </div>
-
-        <div class="alert alert-danger d-none" id="template-error-cargar">
-            <h4>Error al cargar tus citas</h4>
-            <p>Hubo un problema al acceder a tu información.</p>
-            <a href="./login.html" class="btn btn-primary">Iniciar sesión nuevamente</a>
+        <div id="error-message" class="alert alert-danger" style="display: none;">
+            <h4 class="alert-heading">
+                <i class="fas fa-exclamation-circle"></i> Error al cargar tus citas
+            </h4>
+            <p id="error-text">Hubo un problema al acceder a tu información.</p>
+            <hr>
+            <button class="btn btn-outline-danger" onclick="cargarMisCitas()">
+                <i class="fas fa-redo"></i> Intentar nuevamente
+            </button>
+            <a href="./login.html" class="btn btn-primary ms-2">
+                <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+            </a>
         </div>
+        <div id="no-citas-message" class="alert alert-info" style="display: none;">
+            <h4 class="alert-heading">
+                <i class="fas fa-calendar-plus"></i> ¡Hola <span id="usuario-nombre-sin-citas">Usuario</span>!
+            </h4>
+            <p>Aún no tienes citas agendadas. ¡Agenda tu primera cita ahora!</p>
+            <hr>
+            <a href="./agendar-cita.html" class="btn btn-warning">
+                <i class="fas fa-plus"></i> Agendar nueva cita
+            </a>
+        </div>
+        <div id="citas-header" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4>
+                    <i class="fas fa-user"></i> ¡Hola <span id="usuario-nombre-con-citas">Usuario</span>!
+                </h4>
+                <span id="contador-citas" class="badge bg-info fs-6">0 citas</span>
+            </div>
+        </div>
+        <div class="alert alert-warning border-warning" id="confirmacion-cancelar"
+            style="display: none; margin: 20px 0; padding: 20px;">
+            <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-exclamation-triangle me-2" style="font-size: 1.2rem; color: #ff6b35;"></i>
+                <h5 class="mb-0">¿Confirmas la cancelación?</h5>
+            </div>
+            <p class="mb-3" id="confirmacion-texto">
+                Estás a punto de cancelar la cita para el vehículo <strong id="confirmacion-placa">ABC123</strong>.
+                Esta acción eliminará la cita de tu lista y no se puede deshacer.
+            </p>
+            <div class="d-flex gap-2" id="confirmacion-botones">
+                <button class="btn btn-danger" id="confirmar-cancelacion" data-cita-id="">
+                    <i class="fas fa-times me-1"></i>
+                    <span id="btn-confirmar-text">Sí, cancelar cita</span>
+                </button>
+                <button class="btn btn-secondary" id="cancelar-cancelacion">
+                    <i class="fas fa-arrow-left me-1"></i> No, mantener cita
+                </button>
+            </div>
+        </div>
+        <div id="citas-container" class="row" style="display: none;">
+        </div>
+        <div id="nueva-cita-footer" class="row mt-4" style="display: none;">
+            <div class="col-12 text-center">
+                <a href="./agendar-cita.html" class="btn btn-warning">
+                    <i class="fas fa-plus"></i> Agendar nueva cita
+                </a>
+            </div>
+        </div>
+        <template id="cita-template">
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">
+                            <i class="fas fa-calendar"></i> Cita #<span class="cita-id"></span>
+                        </h6>
+                        <span class="cita-estado-badge"></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="text-muted mb-1">
+                                    <i class="fas fa-car"></i> Vehículo
+                                </h6>
+                                <p class="mb-2">
+                                    <strong class="cita-placa"></strong><br>
+                                    <small class="text-muted cita-vehiculo-info"></small>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-muted mb-1">
+                                    <i class="fas fa-clock"></i> Fecha y Hora
+                                </h6>
+                                <p class="mb-2">
+                                    <strong class="cita-fecha"></strong><br>
+                                    <small class="text-muted cita-hora"></small>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="text-muted mb-1">
+                                    <i class="fas fa-tools"></i> Servicio
+                                </h6>
+                                <p class="mb-2">
+                                    <small class="cita-servicio"></small>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-muted mb-1">
+                                    <i class="fas fa-map-marker-alt"></i> Sucursal
+                                </h6>
+                                <p class="mb-2">
+                                    <small class="cita-sucursal"></small>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="cita-observaciones-container" style="display: none;">
+                            <div class="mt-2">
+                                <h6 class="text-muted mb-1">
+                                    <i class="fas fa-sticky-note"></i> Observaciones
+                                </h6>
+                                <p class="mb-0">
+                                    <small class="text-muted cita-observaciones"></small>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar-plus"></i>
+                                Creada: <span class="cita-fecha-creacion"></span>
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-light cita-acciones" style="display: none;">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-primary flex-fill btn-modificar-cita">
+                                <i class="fas fa-edit"></i> Modificar
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger flex-fill btn-cancelar-cita" data-cita-id="">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
     </main>
 
     <footer class="container-fluid bg-dark text-white py-4">
@@ -123,9 +270,10 @@
             </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/navbar.js"></script>
-    <script src="../js/citas.js"></script>
+    <script src="../js/mis-citas.js"></script>
 </body>
 
 </html>

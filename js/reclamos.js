@@ -1,6 +1,3 @@
-// reclamos.js - Con validación personalizada y checkbox como confirmar-cita
-
-// Funciones para mostrar mensajes (iguales que agendar-cita)
 function mostrarMensajeExito() {
     console.log('Mostrando mensaje de éxito');
     const successMsg = document.getElementById('success-message');
@@ -37,7 +34,6 @@ function ocultarMensajes() {
     if (errorMsg) errorMsg.style.display = 'none';
 }
 
-// Función para mostrar error de servidor (cuando validación pasa pero falla conexión)
 function mostrarErrorServidor() {
     const successMsg = document.getElementById('success-message');
     const errorMsg = document.getElementById('error-message');
@@ -52,7 +48,6 @@ function mostrarErrorServidor() {
     }
 }
 
-// Función para mostrar/ocultar error del checkbox (EXACTA de confirmar-cita)
 function mostrarErrorCheckbox(mostrar) {
     const terminosSection = document.getElementById('terminos-section');
     const errorMsg = document.getElementById('checkbox-error');
@@ -70,14 +65,11 @@ function mostrarErrorCheckbox(mostrar) {
     }
 }
 
-// Función para marcar campos con error (igual que agendar-cita)
 function marcarCamposConError(campos) {
     console.log('Marcando campos con error:', campos);
-    // Primero quitar todos los errores (incluir AMBOS formularios)
     const todosCampos = document.querySelectorAll('#form-reclamo select, #formulario-datos input, #formulario-datos textarea');
     todosCampos.forEach(campo => campo.classList.remove('error'));
 
-    // Marcar campos con error
     campos.forEach(campoId => {
         const campo = document.getElementById(campoId);
         if (campo) {
@@ -87,11 +79,9 @@ function marcarCamposConError(campos) {
     });
 }
 
-// Función de validación personalizada (como agendar-cita)
 function validarFormularioReclamo() {
     const camposConError = [];
 
-    // Validar campos de datos personales (lado izquierdo)
     const nombres = document.getElementById('nombres').value.trim();
     if (!nombres) {
         camposConError.push('nombres');
@@ -139,7 +129,6 @@ function validarFormularioReclamo() {
         camposConError.push('detalle');
     }
 
-    // Validar campos del formulario de reclamo (lado derecho)
     const tipo = document.getElementById('tipo').value;
     if (!tipo) {
         camposConError.push('tipo');
@@ -174,14 +163,11 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             console.log('=== FORMULARIO RECLAMO ENVIADO ===');
 
-            // Ocultar mensajes anteriores
             ocultarMensajes();
-            mostrarErrorCheckbox(false); // Ocultar error de checkbox
+            mostrarErrorCheckbox(false);
 
-            // Validar campos normales
             const camposConError = validarFormularioReclamo();
 
-            // Validar checkbox de términos CON VALIDACIÓN VISUAL (igual que confirmar-cita)
             const terminosCheckbox = document.getElementById('terminos-checkbox');
             if (!terminosCheckbox || !terminosCheckbox.checked) {
                 mostrarErrorCheckbox(true);
@@ -198,13 +184,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // Si todo está bien, preparar datos
+
             const tipo = document.getElementById('tipo').value;
             const servicio = document.getElementById('servicio-reclamo').value;
             const motivo = document.getElementById('motivo').value;
             const local = document.getElementById('local').value;
 
             const data = {
+                nombres: document.getElementById('nombres').value.trim(),
+                apellidos: document.getElementById('apellidos').value.trim(),
+                dni: document.getElementById('dni-reclamo').value.trim(),
+                telefono: document.getElementById('telefono-reclamo').value.trim(),
+                email: document.getElementById('email-reclamo').value.trim(),
+                ciudad: document.getElementById('ciudad').value.trim(),
+                placa: document.getElementById('placa-reclamo').value.trim(),
+                detalle: document.getElementById('detalle').value.trim(),
+
                 tipo: tipo,
                 servicio: servicio,
                 motivo: motivo,
@@ -213,13 +208,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.log('Datos a enviar:', data);
 
-            // Mostrar loading en botón
             const submitBtn = formReclamo.querySelector('#boton-de-enviar');
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando...';
 
-            // Usar API_URL global
             const apiUrl = window.API_URL || "http://localhost:8081/api";
             console.log('Enviando a:', apiUrl + '/reclamos');
 
@@ -238,41 +231,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .then(data => {
                     console.log('Reclamo enviado exitosamente:', data);
-                    // Mostrar mensaje de éxito
                     mostrarMensajeExito();
                     formReclamo.reset();
 
-                    // Redirigir después de 3 segundos
                     setTimeout(() => {
                         window.location.href = '../index.html';
                     }, 3000);
                 })
                 .catch(error => {
                     console.error('Error al enviar reclamo:', error);
-                    // Usar función específica para errores de servidor
                     mostrarErrorServidor();
                 })
                 .finally(() => {
-                    // Restaurar botón
                     submitBtn.disabled = false;
                     submitBtn.textContent = originalText;
                     console.log('Botón restaurado');
                 });
         });
 
-        // Limpiar errores cuando el usuario interactúe con los campos (AMBOS formularios)
         const todosCampos = document.querySelectorAll('#form-reclamo select, #formulario-datos input, #formulario-datos textarea');
         todosCampos.forEach(campo => {
             campo.addEventListener('change', function () {
                 this.classList.remove('error');
-                // Si no hay más campos con error, ocultar mensaje
                 const camposConError = document.querySelectorAll('#form-reclamo .error, #formulario-datos .error');
                 if (camposConError.length === 0) {
                     ocultarMensajes();
                 }
             });
 
-            // Para inputs también escuchar 'input'
             if (campo.tagName === 'INPUT' || campo.tagName === 'TEXTAREA') {
                 campo.addEventListener('input', function () {
                     this.classList.remove('error');
@@ -284,17 +270,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Limpiar error del checkbox cuando se marque (EXACTO de confirmar-cita)
         const terminosCheckbox = document.getElementById('terminos-checkbox');
         if (terminosCheckbox) {
             terminosCheckbox.addEventListener('change', function () {
                 if (this.checked) {
                     mostrarErrorCheckbox(false);
 
-                    // AGREGAR: Verificar si ya no hay más errores para ocultar mensaje principal
                     const camposConError = document.querySelectorAll('#form-reclamo .error, #formulario-datos .error');
                     if (camposConError.length === 0) {
-                        ocultarMensajes(); // Ocultar mensaje "Por favor completa los campos"
+                        ocultarMensajes();
                     }
                 }
             });

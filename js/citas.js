@@ -1,6 +1,3 @@
-// citas.js - Refactorizado para usar elementos HTML predefinidos
-
-// Función para mostrar mensaje de éxito
 function mostrarMensajeExito() {
     const successMsg = document.getElementById('success-message');
     const errorMsg = document.getElementById('error-message');
@@ -14,7 +11,6 @@ function mostrarMensajeExito() {
     }
 }
 
-// Función para mostrar mensaje de error
 function mostrarMensajeError() {
     const successMsg = document.getElementById('success-message');
     const errorMsg = document.getElementById('error-message');
@@ -28,7 +24,6 @@ function mostrarMensajeError() {
     }
 }
 
-// Función para ocultar todos los mensajes
 function ocultarMensajes() {
     const successMsg = document.getElementById('success-message');
     const errorMsg = document.getElementById('error-message');
@@ -37,7 +32,6 @@ function ocultarMensajes() {
     if (errorMsg) errorMsg.style.display = 'none';
 }
 
-// Funciones específicas para confirmar-cita.html
 function ocultarTodosLosMensajesConfirmar() {
     const errorFaltanDatos = document.getElementById('error-faltan-datos-message');
     const errorNoAutenticado = document.getElementById('error-no-autenticado-message');
@@ -88,13 +82,9 @@ function mostrarErrorGeneralCita(mensaje) {
     }
 }
 
-// Función para marcar campos con error (solo borde rojo)
 function marcarCamposConError(camposConError) {
-    // Primero quitar todos los errores
     const todosCampos = document.querySelectorAll('.form-control, .form-select');
     todosCampos.forEach(campo => campo.classList.remove('error'));
-
-    // Marcar solo los campos con error
     camposConError.forEach(campoId => {
         const campo = document.getElementById(campoId);
         if (campo) {
@@ -103,97 +93,80 @@ function marcarCamposConError(camposConError) {
     });
 }
 
-// Función para validar el primer paso
 function validarPrimerPaso() {
     const camposConError = [];
 
-    // Validar placa
     const placa = document.getElementById('placa').value.trim();
     if (!placa) {
         camposConError.push('placa');
     }
 
-    // Validar marca
     const marca = document.getElementById('marca').value;
     if (!marca || marca === 'Seleccione marca') {
         camposConError.push('marca');
     }
 
-    // Validar modelo
     const modelo = document.getElementById('modelo').value;
     if (!modelo || modelo === 'Seleccione modelo') {
         camposConError.push('modelo');
     }
 
-    // Validar año
     const año = document.getElementById('año').value;
     if (!año || año === 'Seleccione año del modelo') {
         camposConError.push('año');
     }
 
-    // Validar servicio
     const servicio = document.getElementById('servicio').value;
     if (!servicio || servicio === 'Seleccione servicio') {
         camposConError.push('servicio');
     }
 
-    // Validar sucursal
     const sucursal = document.getElementById('sucursal').value;
     if (!sucursal || sucursal === 'Seleccione local') {
         camposConError.push('sucursal');
     }
 
-    // Validar fecha
     const fecha = document.getElementById('calendario-input').value;
     if (!fecha) {
         camposConError.push('calendario-input');
     }
 
-    // Validar hora
     const horaSeleccionada = document.querySelector('.time-button.active');
     if (!horaSeleccionada) {
-        // Para la hora no hay un campo específico que marcar, así que solo agregamos al contador
         camposConError.push('hora');
     }
 
     return camposConError;
 }
 
-// Función para validar datos personales
 function validarDatosPersonales() {
     const camposConError = [];
 
-    // Validar número de documento
     const numeroDocumento = document.getElementById('numero-documento').value.trim();
     if (!numeroDocumento) {
         camposConError.push('numero-documento');
     }
 
-    // Validar nombre
     const nombre = document.getElementById('nombre').value.trim();
     if (!nombre) {
         camposConError.push('nombre');
     }
 
-    // Validar apellidos
     const apellidos = document.getElementById('apellidos').value.trim();
     if (!apellidos) {
         camposConError.push('apellidos');
     }
 
-    // Validar email
     const email = document.getElementById('email').value.trim();
     if (!email) {
         camposConError.push('email');
     } else {
-        // Validación de formato de email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             camposConError.push('email');
         }
     }
 
-    // Validar teléfono
     const telefono = document.getElementById('telefono').value.trim();
     if (!telefono) {
         camposConError.push('telefono');
@@ -202,7 +175,6 @@ function validarDatosPersonales() {
     return camposConError;
 }
 
-// Función para mostrar/ocultar error del checkbox
 function mostrarErrorCheckbox(mostrar) {
     const terminosSection = document.getElementById('terminos-section');
     const errorMsg = document.getElementById('checkbox-error');
@@ -220,7 +192,6 @@ function mostrarErrorCheckbox(mostrar) {
     }
 }
 
-// Guardar datos de agendar-cita
 const btnSiguienteA = document.getElementById('btn-siguiente-a');
 if (btnSiguienteA) {
     btnSiguienteA.addEventListener('click', function (e) {
@@ -228,17 +199,14 @@ if (btnSiguienteA) {
 
         console.log('=== VALIDANDO DATOS AGENDAR ===');
 
-        // Validar todos los campos
         const camposConError = validarPrimerPaso();
 
         if (camposConError.length > 0) {
-            // Mostrar mensaje de error y marcar campos
             marcarCamposConError(camposConError.filter(campo => campo !== 'hora'));
             mostrarMensajeError();
             return;
         }
 
-        // Si todo está bien, guardar datos
         const placa = document.getElementById('placa').value.trim();
         const marca = document.getElementById('marca').value;
         const modelo = document.getElementById('modelo').value;
@@ -262,17 +230,13 @@ if (btnSiguienteA) {
         console.log('Datos a guardar:', datosAgendar);
         localStorage.setItem('datosAgendar', JSON.stringify(datosAgendar));
 
-        // Mostrar mensaje de éxito antes de continuar
         mostrarMensajeExito();
-
-        // Redirigir después de un breve delay
         setTimeout(() => {
             window.location.href = './ingresar-datos.html';
         }, 1500);
     });
 }
 
-// Guardar datos personales
 const btnSiguiente = document.getElementById('btn-siguiente');
 if (btnSiguiente) {
     btnSiguiente.addEventListener('click', function (e) {
@@ -280,17 +244,14 @@ if (btnSiguiente) {
 
         console.log('=== VALIDANDO DATOS PERSONALES ===');
 
-        // Validar todos los campos
         const camposConError = validarDatosPersonales();
 
         if (camposConError.length > 0) {
-            // Mostrar mensaje de error y marcar campos
             marcarCamposConError(camposConError);
             mostrarMensajeError();
             return;
         }
 
-        // Si todo está bien, guardar datos
         const tipoDocumento = document.getElementById('tipo-documento').value;
         const numeroDocumento = document.getElementById('numero-documento').value.trim();
         const nombre = document.getElementById('nombre').value.trim();
@@ -310,52 +271,42 @@ if (btnSiguiente) {
         console.log('Datos personales a guardar:', datosPersonales);
         localStorage.setItem('datosPersonales', JSON.stringify(datosPersonales));
 
-        // Mostrar mensaje de éxito
         mostrarMensajeExito();
-
-        // Redirigir después de un breve delay
         setTimeout(() => {
             window.location.href = './confirmar-cita.html';
         }, 1500);
     });
 }
 
-// Confirmar cita y enviar al backend - REFACTORIZADO
 const btnConfirmar = document.getElementById('btn-confirmar');
 if (btnConfirmar) {
     btnConfirmar.addEventListener('click', function (e) {
         e.preventDefault();
 
-        // VALIDACIÓN DEL CHECKBOX CON MENSAJE VISUAL
         const terminosCheckbox = document.getElementById('terminos-checkbox');
         if (!terminosCheckbox || !terminosCheckbox.checked) {
             mostrarErrorCheckbox(true);
             return;
         }
 
-        // Ocultar error si el checkbox está marcado
         mostrarErrorCheckbox(false);
 
         const datosAgendar = JSON.parse(localStorage.getItem('datosAgendar') || '{}');
         const datosPersonales = JSON.parse(localStorage.getItem('datosPersonales') || '{}');
 
-        // Verificar que existen los datos
         if (!datosAgendar.fecha || !datosPersonales.nombre) {
             mostrarErrorFaltanDatos();
             return;
         }
 
-        // VERIFICAR TOKEN
         const token = localStorage.getItem('token');
         if (!token) {
             mostrarErrorNoAutenticado();
             return;
         }
 
-        // Usar API_URL
         const apiUrl = window.API_URL || "http://localhost:8081/api";
 
-        // Estructurar los datos según el backend
         const cita = {
             placa: datosAgendar.placa,
             marca: datosAgendar.marca,
@@ -368,7 +319,6 @@ if (btnConfirmar) {
             observaciones: ""
         };
 
-        // Mostrar loading
         const originalText = btnConfirmar.textContent;
         btnConfirmar.disabled = true;
         btnConfirmar.textContent = 'Enviando...';
@@ -377,7 +327,6 @@ if (btnConfirmar) {
         console.log('Token:', token ? 'Presente' : 'Ausente');
         console.log('Datos de cita:', cita);
 
-        // PETICIÓN CON TOKEN
         fetch(apiUrl + '/citas', {
             method: 'POST',
             headers: {
@@ -399,14 +348,11 @@ if (btnConfirmar) {
             .then(data => {
                 console.log('Cita creada exitosamente:', data);
 
-                // Limpiar datos del localStorage
                 localStorage.removeItem('datosAgendar');
                 localStorage.removeItem('datosPersonales');
 
-                // Mostrar mensaje de éxito
                 mostrarCitaAgendadaExitosa();
 
-                // Redirigir después de 3 segundos
                 setTimeout(() => {
                     window.location.href = '../index.html';
                 }, 3000);
@@ -415,14 +361,12 @@ if (btnConfirmar) {
                 console.error('Error al agendar cita:', error);
                 mostrarErrorGeneralCita(error.message);
 
-                // Restaurar botón
                 btnConfirmar.disabled = false;
                 btnConfirmar.textContent = originalText;
             });
     });
 }
 
-// Limpiar error cuando el usuario marque el checkbox
 const terminosCheckbox = document.getElementById('terminos-checkbox');
 if (terminosCheckbox) {
     terminosCheckbox.addEventListener('change', function () {
@@ -432,14 +376,12 @@ if (terminosCheckbox) {
     });
 }
 
-// Agregar eventos para limpiar errores cuando el usuario interactúe con los campos
 document.addEventListener('DOMContentLoaded', function () {
-    // Limpiar errores en tiempo real
+
     const todosCampos = document.querySelectorAll('.form-control, .form-select');
     todosCampos.forEach(campo => {
         campo.addEventListener('change', function () {
             this.classList.remove('error');
-            // Si no hay más campos con error, ocultar mensaje
             const camposConError = document.querySelectorAll('.form-control.error, .form-select.error');
             if (camposConError.length === 0) {
                 ocultarMensajes();
@@ -448,7 +390,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         campo.addEventListener('input', function () {
             this.classList.remove('error');
-            // Si no hay más campos con error, ocultar mensaje
             const camposConError = document.querySelectorAll('.form-control.error, .form-select.error');
             if (camposConError.length === 0) {
                 ocultarMensajes();
@@ -456,10 +397,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Para los botones de hora
     document.querySelectorAll('.time-button').forEach(btn => {
         btn.addEventListener('click', function () {
-            // Si había error por no seleccionar hora, ocultarlo
             const camposConError = document.querySelectorAll('.form-control.error, .form-select.error');
             if (camposConError.length === 0) {
                 ocultarMensajes();
@@ -468,13 +407,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Obtener información del usuario para mis-citas.html - REFACTORIZADO
 const citasContainer = document.getElementById('citas-lista');
 if (citasContainer) {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        // Mostrar mensaje de login requerido usando HTML predefinido
         citasContainer.innerHTML = `
             <div class="alert alert-warning" id="login-requerido-citas">
                 <h4>Inicia sesión para ver tus citas</h4>
@@ -499,7 +436,6 @@ if (citasContainer) {
                 }
             })
             .then(usuario => {
-                // Mostrar información del usuario usando HTML predefinido
                 citasContainer.innerHTML = `
                 <div class="alert alert-info" id="bienvenida-usuario-citas">
                     <h4>¡Hola ${usuario.nombre || 'Usuario'}!</h4>
@@ -511,7 +447,6 @@ if (citasContainer) {
             })
             .catch(error => {
                 console.error('Error al obtener usuario:', error);
-                // Mostrar mensaje de error usando HTML predefinido
                 citasContainer.innerHTML = `
                 <div class="alert alert-danger" id="error-cargar-citas">
                     <h4>Error al cargar tus citas</h4>

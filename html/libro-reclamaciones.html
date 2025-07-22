@@ -67,11 +67,8 @@
           </div>
         </section>
 
-        <!-- SECCIÓN DEL FORMULARIO ACTUALIZADA PARA LIBRO-RECLAMACIONES.HTML -->
         <section id="formulario-contacto-reclamo" class="reclamos-formulario">
           <div class="container form-pair">
-
-            <!-- DATOS PERSONALES - Mantener estilos originales pero SIN required -->
             <div id="formulario-datos" class="formulario-col">
               <h2>Datos Personales</h2>
               <form>
@@ -85,22 +82,16 @@
                 <textarea name="detalle" id="detalle" placeholder="Detalle del reclamo o queja *" rows="4"></textarea>
               </form>
             </div>
-
-            <!-- FORMULARIO DE RECLAMO -->
             <div class="formulario-col">
               <h2>Enviar una solicitud</h2>
-
-              <!-- Mensajes de notificación inline (ahora con clases Bootstrap) -->
               <div class="alert alert-success success-message" id="success-message" style="display: none;">
                 ✅ Su reclamo ha sido procesado exitosamente. Nos pondremos en contacto con usted pronto.
               </div>
-
               <div class="alert alert-danger error-message" id="error-message" style="display: none;">
                 ⚠️ Por favor, completa todos los campos marcados en rojo correctamente.
               </div>
 
               <form id="form-reclamo">
-                <!-- Mantener estilos originales pero SIN required -->
                 <select name="tipo" id="tipo">
                   <option value="" disabled selected>Tipo de solicitud</option>
                   <option value="reclamo">Reclamo</option>
@@ -117,24 +108,24 @@
 
                 <select name="motivo" id="motivo">
                   <option value="" disabled selected>Motivo de contacto</option>
-                  <option value="entrega">Fecha de entrega de vehículo</option>
-                  <option value="devolicion">Devolición de dinero pendiente</option>
-                  <option value="boleta">Solicitud de factura o boleta</option>
-                  <option value="documentacion">Documentación pendiente</option>
-                  <option value="accesorio">Accesorio o repuesto pendiente</option>
-                  <option value="mecanica">Falla mecánica</option>
-                  <option value="atencion">Atención asesor de ventas o servicio</option>
-                  <option value="perdida">Perdida de objetos personales</option>
-                  <option value="papeles">Papeletas</option>
-                  <option value="otros">Otros</option>
+                  <option value="Fecha de entrega de vehículo">Fecha de entrega de vehículo</option>
+                  <option value="Devolición de dinero pendiente">Devolición de dinero pendiente</option>
+                  <option value="Solicitud de factura o boleta">Solicitud de factura o boleta</option>
+                  <option value="Documentación pendiente">Documentación pendiente</option>
+                  <option value="Accesorio o repuesto pendiente">Accesorio o repuesto pendiente</option>
+                  <option value="Falla mecánica">Falla mecánica</option>
+                  <option value="Atención asesor de ventas o servicio">Atención asesor de ventas o servicio</option>
+                  <option value="Perdida de objetos personales">Perdida de objetos personales</option>
+                  <option value="Papeletas">Papeletas</option>
+                  <option value="Otros">Otros</option>
                 </select>
 
                 <select name="local" id="local">
                   <option value="" disabled selected>Local</option>
-                  <option value="miraflores">Surco</option>
-                  <option value="la victoria">La Marina</option>
-                  <option value="los olivos">Naranjal</option>
-                  <option value="ate">Surquillo</option>
+                  <option value="Surco">Surco</option>
+                  <option value="Marina">La Marina</option>
+                  <option value="Naranjal">Naranjal</option>
+                  <option value="Surquillo">Surquillo</option>
                 </select>
 
                 <div class="checkbox-section" id="terminos-section">

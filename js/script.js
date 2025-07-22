@@ -1,4 +1,3 @@
-/*  Script para el acordeón de locales */
 document.addEventListener("DOMContentLoaded", () => {
   const items = document.querySelectorAll(".locales-acordeon-item");
 

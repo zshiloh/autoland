@@ -1,6 +1,3 @@
-// auth.js - Refactorizado sin HTML hardcodeado
-
-// Funciones para mostrar mensajes usando elementos predefinidos en HTML
 function mostrarMensajeExito() {
     const successMsg = document.getElementById('success-message');
     const errorMsg = document.getElementById('error-message');
@@ -36,11 +33,9 @@ function ocultarMensajes() {
 }
 
 function marcarCamposConError(camposConError) {
-    // Primero quitar todos los errores
     const todosCampos = document.querySelectorAll('.form-control');
     todosCampos.forEach(campo => campo.classList.remove('error'));
 
-    // Marcar solo los campos con error
     camposConError.forEach(campoId => {
         const campo = document.getElementById(campoId);
         if (campo) {
@@ -49,9 +44,7 @@ function marcarCamposConError(camposConError) {
     });
 }
 
-// Función para mostrar errores del servidor usando elementos predefinidos
 function mostrarErrorServidor(mensaje, esLogin = false) {
-    // Intentar usar primero elementos predefinidos en HTML
     const errorServerElement = document.getElementById('error-servidor-message');
     if (errorServerElement) {
         const errorText = errorServerElement.querySelector('.error-text');
@@ -63,11 +56,8 @@ function mostrarErrorServidor(mensaje, esLogin = false) {
         return;
     }
 
-    // Fallback: crear elemento dinámicamente si no existe el predefinido
     const form = esLogin ? document.getElementById('form-login') : document.querySelector('#registro-form form');
     if (!form) return;
-
-    // Limpiar alertas anteriores
     const alertasAnteriores = form.querySelectorAll('.alert-danger');
     alertasAnteriores.forEach(alerta => alerta.remove());
 
@@ -78,7 +68,6 @@ function mostrarErrorServidor(mensaje, esLogin = false) {
     errorDiv.scrollIntoView({ behavior: 'smooth' });
 }
 
-// LOGIN
 const loginForm = document.getElementById('form-login');
 if (loginForm) {
     loginForm.addEventListener('submit', function (e) {
@@ -89,7 +78,6 @@ if (loginForm) {
 
         console.log("Login enviado: email='" + email + "', password='" + password + "'");
 
-        // Validación básica
         const camposConError = [];
         if (!email) {
             camposConError.push('email');
@@ -103,15 +91,10 @@ if (loginForm) {
             mostrarMensajeError();
             return;
         }
-
-        // Ocultar mensajes de error
         ocultarMensajes();
 
-        // Usar API_URL global
         const apiUrl = window.API_URL || "http://localhost:8081/api";
         const data = { email, password };
-
-        // Mostrar loading en botón
         const submitBtn = loginForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
@@ -130,16 +113,11 @@ if (loginForm) {
                 }
             })
             .then(data => {
-                // Guardar datos del usuario y token
                 localStorage.setItem('usuario', JSON.stringify(data.usuario || data));
                 if (data.token) {
                     localStorage.setItem('token', data.token);
                 }
-
-                // Mostrar mensaje de éxito visual
                 mostrarMensajeExito();
-
-                // Redirigir después de un breve delay
                 setTimeout(() => {
                     window.location.href = '../index.html';
                 }, 1500);
@@ -149,14 +127,12 @@ if (loginForm) {
                 mostrarErrorServidor('Credenciales incorrectas o servidor no disponible.', true);
             })
             .finally(() => {
-                // Restaurar botón
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             });
     });
 }
 
-// REGISTRO - Validaciones visuales mejoradas
 const registroForm = document.querySelector('#registro-form form');
 if (registroForm) {
     registroForm.addEventListener('submit', function (e) {
@@ -164,15 +140,12 @@ if (registroForm) {
 
         console.log('=== VALIDANDO REGISTRO ===');
 
-        // Obtener valores
         const nombre = document.getElementById('nombre').value.trim();
         const apellidos = document.getElementById('apellidos').value.trim();
         const email = document.getElementById('email').value.trim();
         const telefono = document.getElementById('telefono').value.trim();
         const contrasena = document.getElementById('contrasena').value.trim();
         const dni = document.getElementById('dni').value.trim();
-
-        // Validaciones
         const camposConError = [];
 
         if (!nombre) {
@@ -184,7 +157,7 @@ if (registroForm) {
         if (!email) {
             camposConError.push('email');
         } else {
-            // Validación de email
+
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 camposConError.push('email');
@@ -203,21 +176,15 @@ if (registroForm) {
         } else if (dni.length !== 8 || !/^\d+$/.test(dni)) {
             camposConError.push('dni');
         }
-
-        // Si hay errores, mostrarlos y salir
         if (camposConError.length > 0) {
             marcarCamposConError(camposConError);
             mostrarMensajeError();
             return;
         }
 
-        // Si todo está bien, ocultar errores
         ocultarMensajes();
 
-        // Usar API_URL global
         const apiUrl = window.API_URL || "http://localhost:8081/api";
-
-        // Datos para enviar al servidor
         const data = {
             nombre: nombre,
             correo: email,
@@ -228,8 +195,6 @@ if (registroForm) {
         };
 
         console.log('Datos a enviar:', data);
-
-        // Mostrar loading en el botón
         const submitBtn = registroForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
@@ -250,10 +215,9 @@ if (registroForm) {
                 }
             })
             .then(data => {
-                // Mostrar mensaje de éxito
+
                 mostrarMensajeExito();
 
-                // Redirigir después de un delay
                 setTimeout(() => {
                     window.location.href = '../html/login.html';
                 }, 2000);
@@ -263,18 +227,15 @@ if (registroForm) {
                 mostrarErrorServidor('No se pudo registrar el usuario.', false);
             })
             .finally(() => {
-                // Restaurar botón
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             });
     });
 
-    // Limpiar errores cuando el usuario interactúe con los campos
     const todosCampos = document.querySelectorAll('#registro-form input');
     todosCampos.forEach(campo => {
         campo.addEventListener('input', function () {
             this.classList.remove('error');
-            // Si no hay más campos con error, ocultar mensaje
             const camposConError = document.querySelectorAll('#registro-form input.error');
             if (camposConError.length === 0) {
                 ocultarMensajes();

@@ -52,24 +52,18 @@
         </div>
     </header>
 
-    <!-- SECCIÓN DEL FORMULARIO ACTUALIZADA PARA CONTACTO.HTML -->
     <main id="cuerpo">
         <section id="contacto" class="container-fluid">
             <div class="container">
                 <div id="formulario-datos">
                     <h2>Contáctanos</h2>
-
-                    <!-- Mensajes de notificación inline (mismos IDs) -->
                     <div class="alert alert-success success-message" id="success-message" style="display: none;">
                         ✅ Mensaje enviado correctamente. Te contactaremos pronto.
                     </div>
-
                     <div class="alert alert-danger error-message" id="error-message" style="display: none;">
                         ⚠️ Por favor, completa todos los campos marcados en rojo correctamente.
                     </div>
-
                     <form id="form-contacto" action="#" method="POST">
-                        <!-- MANTENER estilos originales pero SIN required -->
                         <input type="text" name="nombre" id="nombre" placeholder="Nombre completo">
                         <input type="text" name="dni" id="dni" placeholder="DNI / Nº Documento">
                         <input type="tel" name="telefono" id="telefono" placeholder="Móvil / Nº Teléfono">
@@ -77,11 +71,11 @@
 
                         <select name="consulta" id="consulta">
                             <option value="" disabled selected>¿Cuál es su consulta?</option>
-                            <option value="tasar">Quiero tasar mi auto</option>
-                            <option value="cotizar_nuevo">Cotizar vehículo nuevo</option>
-                            <option value="cotizar_seminuevo">Cotizar vehículo seminuevo</option>
-                            <option value="reclamos">Reclamos</option>
-                            <option value="otra">Otra consulta</option>
+                            <option value="Quiero tasar mi auto">Quiero tasar mi auto</option>
+                            <option value="Cotizar vehículo nuevo">Cotizar vehículo nuevo</option>
+                            <option value="Cotizar vehículo seminuevo">Cotizar vehículo seminuevo</option>
+                            <option value="Reclamos">Reclamos</option>
+                            <option value="Otra consulta">Otra consulta</option>
                         </select>
 
                         <textarea id="mensaje" name="mensaje" placeholder="Déjanos un mensaje" rows="4"></textarea>
