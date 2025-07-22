@@ -939,6 +939,11 @@
   color: #151515;
 }
 
+#formulario-contacto-reclamo select.error {
+    border: 1px solid #dc3545;
+    background-color: #fff5f5;
+}
+
 #formulario-datos input,
 textarea,
 select {
@@ -955,16 +960,27 @@ select {
 textarea:focus,
 select:focus {
   outline: none;
-  border: 2px solid #960101;
+  border: 1px solid #960101;
   background-color: #fff;
 }
 
-#formulario-datos .checkbox-group {
-  margin-bottom: 20px;
+#formulario-datos input.error,
+#formulario-datos textarea.error,
+#formulario-datos select.error {
+    border: 1px solid #dc3545;
+    background-color: #fff5f5;
 }
 
 #formulario-datos .checkbox-item {
-  margin-bottom: 16px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+#terminos-section.error .checkbox-item {
+  border: 1px solid #dc3545;
+  background-color: #f8d7da;
 }
 
 #formulario-datos .checkbox-item label {
@@ -987,7 +1003,6 @@ select:focus {
   font-size: 0.85em;
   color: #555;
   margin-left: 28px;
-  /* para alinear con el texto */
   margin-top: 4px;
 }
 
@@ -998,6 +1013,42 @@ select:focus {
   margin-bottom: 4px;
 }
 
+#terminos-section {
+    margin: 30px 0;
+}
+
+#form-reclamo .checkbox-item {
+    border: 1px solid transparent;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+#form-reclamo #terminos-section.error .checkbox-item {
+    border: 1px solid #dc3545;
+    background-color: #f8d7da;
+    padding: 10px;
+}
+
+#terminos-section .checkbox-error {
+    color: #dc3545;
+    font-size: 0.9em;
+    margin-top: 8px;
+    display: none;
+    font-weight: 500;
+}
+
+#terminos-section.error .checkbox-error {
+    display: block;
+}
+
+#link-terminos {
+    color: #ff8c00;
+    text-decoration: none;
+}
+
+#link-terminos:hover {
+    text-decoration: underline;
+}
 
 /* Botón */
 #boton-de-enviar {

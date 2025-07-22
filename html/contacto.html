@@ -52,13 +52,14 @@
         </div>
     </header>
 
+    <!-- SECCIÓN DEL FORMULARIO ACTUALIZADA PARA CONTACTO.HTML -->
     <main id="cuerpo">
         <section id="contacto" class="container-fluid">
             <div class="container">
                 <div id="formulario-datos">
                     <h2>Contáctanos</h2>
 
-                    <!-- Mensajes de notificación inline (mismos IDs y clases que el resto) -->
+                    <!-- Mensajes de notificación inline (mismos IDs) -->
                     <div class="alert alert-success success-message" id="success-message" style="display: none;">
                         ✅ Mensaje enviado correctamente. Te contactaremos pronto.
                     </div>
@@ -68,12 +69,13 @@
                     </div>
 
                     <form id="form-contacto" action="#" method="POST">
-                        <input type="text" name="nombre" placeholder="Nombre completo" required>
-                        <input type="text" name="dni" placeholder="DNI / Nº Documento" required>
-                        <input type="tel" name="telefono" placeholder="Móvil / Nº Teléfono" required>
-                        <input type="email" name="email" placeholder="Email" required>
+                        <!-- MANTENER estilos originales pero SIN required -->
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre completo">
+                        <input type="text" name="dni" id="dni" placeholder="DNI / Nº Documento">
+                        <input type="tel" name="telefono" id="telefono" placeholder="Móvil / Nº Teléfono">
+                        <input type="email" name="email" id="email" placeholder="Email">
 
-                        <select name="consulta" required>
+                        <select name="consulta" id="consulta">
                             <option value="" disabled selected>¿Cuál es su consulta?</option>
                             <option value="tasar">Quiero tasar mi auto</option>
                             <option value="cotizar_nuevo">Cotizar vehículo nuevo</option>
@@ -82,30 +84,33 @@
                             <option value="otra">Otra consulta</option>
                         </select>
 
-                        <textarea id="mensaje" placeholder="Déjanos un mensaje" rows="4" required></textarea>
+                        <textarea id="mensaje" name="mensaje" placeholder="Déjanos un mensaje" rows="4"></textarea>
 
-                        <div class="checkbox-group">
+                        <div class="checkbox-section" id="terminos-section">
                             <div class="checkbox-item">
                                 <label>
-                                    <input type="checkbox" name="tc" required>
+                                    <input type="checkbox" name="tc" id="terminos-checkbox">
                                     He leído y acepto los términos y condiciones de la política de privacidad vigente.
                                 </label>
                                 <div class="info-extra">
                                     <span><a href="../html/terminos.html" id="link-terminos" target="_blank">(Ver
                                             términos y condiciones)</a></span><br>
-                                    <span><a href="../html/terminos.html" id="link-terminos" target="_blank">(Ver
-                                            política de privacidad)</a></span>
+                                    <span><a href="../html/terminos.html" target="_blank">(Ver política de
+                                            privacidad)</a></span>
                                 </div>
                             </div>
+                            <div class="checkbox-error" id="checkbox-error">
+                                ⚠️ Debes aceptar los términos y condiciones para continuar
+                            </div>
+                        </div>
 
-                            <div class="checkbox-item">
-                                <label>
-                                    <input type="checkbox" name="info">
-                                    Acepto recibir información sobre productos y servicios de Autoland.
-                                </label>
-                                <div class="info-extra">
-                                    <a href="../html/terminos.html" target="_blank">Ver términos comerciales</a>
-                                </div>
+                        <div class="checkbox-item">
+                            <label>
+                                <input type="checkbox" name="info" id="info">
+                                Acepto recibir información sobre productos y servicios de Autoland.
+                            </label>
+                            <div class="info-extra">
+                                <a href="../html/terminos.html" target="_blank">Ver términos comerciales</a>
                             </div>
                         </div>
 
